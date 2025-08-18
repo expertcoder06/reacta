@@ -27,9 +27,9 @@ export type DiagnosticCenter = {
 };
 
 export const diagnosticCenters: DiagnosticCenter[] = [
-  { id: '1', name: 'Dr. Lal PathLabs', location: 'Koramangala, Bangalore', tests: ['Blood Test', 'Urine Test', 'MRI Scan'], logo: 'https://placehold.co/100x100.png', dataAiHint: 'laboratory building' },
-  { id: '2', name: 'Metropolis Healthcare', location: 'Andheri, Mumbai', tests: ['CT Scan', 'X-Ray', 'ECG'], logo: 'https://placehold.co/100x100.png', dataAiHint: 'modern building' },
-  { id: '3', name: 'SRL Diagnostics', location: 'Connaught Place, Delhi', tests: ['Ultrasound', 'Thyroid Test', 'Vitamin D Test'], logo: 'https://placehold.co/100x100.png', dataAiHint: 'clinic exterior' },
+  { id: '1', name: 'Dr. Lal PathLabs', location: 'Koramangala, Bangalore', tests: ['Blood Test', 'Urine Test', 'MRI Scan'], logo: 'https://placehold.co/200x200.png', dataAiHint: 'laboratory building' },
+  { id: '2', name: 'Metropolis Healthcare', location: 'Andheri, Mumbai', tests: ['CT Scan', 'X-Ray', 'ECG'], logo: 'https://placehold.co/200x200.png', dataAiHint: 'modern building' },
+  { id: '3', name: 'SRL Diagnostics', location: 'Connaught Place, Delhi', tests: ['Ultrasound', 'Thyroid Test', 'Vitamin D Test'], logo: 'https://placehold.co/200x200.png', dataAiHint: 'clinic exterior' },
 ];
 
 export type Hospital = {
@@ -42,9 +42,9 @@ export type Hospital = {
 };
 
 export const hospitals: Hospital[] = [
-  { id: '1', name: 'Apollo Hospital', location: 'Sarita Vihar, Delhi', facilities: ['24/7 Emergency', 'ICU', 'Pharmacy'], image: 'https://placehold.co/300x200.png', dataAiHint: 'hospital building' },
-  { id: '2', name: 'Fortis Hospital', location: 'Mulund, Mumbai', facilities: ['Multi-specialty', 'Ambulance Service', 'In-patient Care'], image: 'https://placehold.co/300x200.png', dataAiHint: 'modern hospital' },
-  { id: '3', name: 'Manipal Hospital', location: 'Old Airport Road, Bangalore', facilities: ['Robotic Surgery', 'Cancer Care', 'Pediatrics'], image: 'https://placehold.co/300x200.png', dataAiHint: 'clinic building' },
+  { id: '1', name: 'Apollo Hospital', location: 'Sarita Vihar, Delhi', facilities: ['24/7 Emergency', 'ICU', 'Pharmacy'], image: 'https://placehold.co/400x250.png', dataAiHint: 'hospital building' },
+  { id: '2', name: 'Fortis Hospital', location: 'Mulund, Mumbai', facilities: ['Multi-specialty', 'Ambulance Service', 'In-patient Care'], image: 'https://placehold.co/400x250.png', dataAiHint: 'modern hospital' },
+  { id: '3', name: 'Manipal Hospital', location: 'Old Airport Road, Bangalore', facilities: ['Robotic Surgery', 'Cancer Care', 'Pediatrics'], image: 'https://placehold.co/400x250.png', dataAiHint: 'clinic building' },
 ];
 
 export type Appointment = {

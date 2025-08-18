@@ -23,7 +23,7 @@ export default function HospitalsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {hospitals.map((hospital) => (
           <Card key={hospital.id} className="overflow-hidden">
-            <Image src={hospital.image} alt={hospital.name} width={400} height={200} className="w-full h-40 object-cover" data-ai-hint={hospital.dataAiHint} />
+            <Image src={hospital.image} alt={hospital.name} width={400} height={250} className="w-full h-48 object-cover" data-ai-hint={hospital.dataAiHint} />
             <CardHeader>
               <CardTitle>{hospital.name}</CardTitle>
               <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
