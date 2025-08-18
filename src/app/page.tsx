@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, LocateFixed, CalendarPlus } from 'lucide-react';
+import { MapPin, Search, LocateFixed, CalendarPlus, Facebook, Twitter, Youtube, Linkedin, Github } from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
 import { useToast } from "@/hooks/use-toast"
 
@@ -84,28 +84,28 @@ export default function Home() {
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                  <ServiceCard
-                  imageUrl="https://placehold.co/400x400.png"
+                  imageUrl="https://placehold.co/200x200.png"
                   imageHint="calendar appointment"
                   title="Book an Instant Appointment"
                   description="Quick and easy scheduling"
                   href="/doctors"
                 />
                <ServiceCard
-                  imageUrl="https://placehold.co/400x400.png"
+                  imageUrl="https://placehold.co/200x200.png"
                   imageHint="doctor video"
                   title="Instant Video Consultation"
                   description="Connect within 60 secs"
                   href="/dashboard"
                 />
                 <ServiceCard
-                  imageUrl="https://placehold.co/400x400.png"
+                  imageUrl="https://placehold.co/200x200.png"
                   imageHint="female doctor"
                   title="Find Doctors Near You"
                   description="Confirmed appointments"
                   href="/doctors"
                 />
                 <ServiceCard
-                  imageUrl="https://placehold.co/400x400.png"
+                  imageUrl="https://placehold.co/200x200.png"
                   imageHint="operating room"
                   title="Surgeries"
                   description="Safe and trusted surgery centers"
@@ -130,16 +130,77 @@ export default function Home() {
         </section>
 
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; 2024 Sanjiwani Health. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
-            Terms of Service
-          </Link>
-          <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
-            Privacy
-          </Link>
-        </nav>
+      <footer className="bg-primary text-primary-foreground py-12">
+        <div className="container mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-6 gap-8">
+          <div className="space-y-4">
+            <h4 className="font-semibold">Sanjiwani</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">About</Link></li>
+              <li><Link href="#" className="hover:underline">Blog</Link></li>
+              <li><Link href="#" className="hover:underline">Careers</Link></li>
+              <li><Link href="#" className="hover:underline">Press</Link></li>
+              <li><Link href="#" className="hover:underline">Contact Us</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="font-semibold">For patients</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/doctors" className="hover:underline">Search for doctors</Link></li>
+              <li><Link href="#" className="hover:underline">Search for clinics</Link></li>
+              <li><Link href="/hospitals" className="hover:underline">Search for hospitals</Link></li>
+              <li><Link href="#" className="hover:underline">Book a test</Link></li>
+              <li><Link href="#" className="hover:underline">Order medicines</Link></li>
+              <li><Link href="/records" className="hover:underline">Read health articles</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="font-semibold">For doctors</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">Practo Profile</Link></li>
+            </ul>
+             <h4 className="font-semibold pt-4">For clinics</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">Ray by Practo</Link></li>
+              <li><Link href="#" className="hover:underline">Practo Reach</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="font-semibold">For hospitals</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">Insta by Sanjiwani</Link></li>
+              <li><Link href="#" className="hover:underline">Qikwell by Sanjiwani</Link></li>
+              <li><Link href="#" className="hover:underline">Sanjiwani Profile</Link></li>
+              <li><Link href="#" className="hover:underline">Sanjiwani Reach</Link></li>
+            </ul>
+             <h4 className="font-semibold pt-4">For Corporates</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">Wellness Plans</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="font-semibold">More</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="hover:underline">Help</Link></li>
+              <li><Link href="#" className="hover:underline">Developers</Link></li>
+              <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:underline">Terms & Conditions</Link></li>
+              <li><Link href="#" className="hover:underline">Healthcare Directory</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="font-semibold">Social</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Facebook className="w-4 h-4" /> Facebook</Link></li>
+              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Twitter className="w-4 h-4" /> Twitter</Link></li>
+              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Youtube className="w-4 h-4" /> Youtube</Link></li>
+              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Linkedin className="w-4 h-4" /> LinkedIn</Link></li>
+               <li><Link href="#" className="flex items-center gap-2 hover:underline"><Github className="w-4 h-4" /> Github</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="container mx-auto px-4 md:px-6 mt-8 text-center text-sm">
+            <p>&copy; 2024 Sanjiwani Health. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );
