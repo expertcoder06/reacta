@@ -92,21 +92,21 @@ export default function Home() {
                 />
                <ServiceCard
                   imageUrl="https://placehold.co/400x400.png"
-                  imageHint="doctor video call"
+                  imageHint="doctor video"
                   title="Instant Video Consultation"
                   description="Connect within 60 secs"
                   href="/dashboard"
                 />
                 <ServiceCard
                   imageUrl="https://placehold.co/400x400.png"
-                  imageHint="female doctor portrait"
+                  imageHint="female doctor"
                   title="Find Doctors Near You"
                   description="Confirmed appointments"
                   href="/doctors"
                 />
                 <ServiceCard
                   imageUrl="https://placehold.co/400x400.png"
-                  imageHint="surgeon in operating room"
+                  imageHint="operating room"
                   title="Surgeries"
                   description="Safe and trusted surgery centers"
                   href="/hospitals"
