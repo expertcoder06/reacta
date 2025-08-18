@@ -83,6 +83,13 @@ export default function Home() {
             </div>
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                 <ServiceCard
+                  imageUrl="https://placehold.co/400x400.png"
+                  imageHint="calendar appointment"
+                  title="Book an Instant Appointment"
+                  description="Quick and easy scheduling"
+                  href="/doctors"
+                />
                <ServiceCard
                   imageUrl="https://placehold.co/400x400.png"
                   imageHint="doctor video call"
@@ -95,13 +102,6 @@ export default function Home() {
                   imageHint="female doctor portrait"
                   title="Find Doctors Near You"
                   description="Confirmed appointments"
-                  href="/doctors"
-                />
-                 <ServiceCard
-                  imageUrl="https://placehold.co/400x400.png"
-                  imageHint="calendar appointment"
-                  title="Book an Instant Appointment"
-                  description="Quick and easy scheduling"
                   href="/doctors"
                 />
                 <ServiceCard
