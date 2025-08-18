@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { appointments, doctors, healthRecords } from '@/lib/data';
-import { Stethoscope, FlaskConical, Hospital, ArrowRight, Video, User } from 'lucide-react';
+import { Stethoscope, FlaskConical, Hospital, ArrowRight, Video, User, FileText } from 'lucide-react';
 
 export default function DashboardPage() {
   return (
