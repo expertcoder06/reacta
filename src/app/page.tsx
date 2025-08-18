@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Stethoscope, FlaskConical, Hospital, FileText, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { MapPin, Search } from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
 
 export default function Home() {
@@ -12,74 +14,77 @@ export default function Home() {
           <SanjiwaniLogo className="h-6 w-6 text-primary" />
           <span className="font-semibold text-lg">Sanjiwani Health</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link href="#features" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Features
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
+          <Link href="/doctors" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Find Doctors
           </Link>
-          <Link href="#about" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            About
+          <Link href="/dashboard" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Video Consult
           </Link>
-          <Button asChild>
-            <Link href="/dashboard">Get Started</Link>
+           <Link href="/hospitals" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Surgeries
+          </Link>
+          <Button asChild variant="outline">
+            <Link href="/dashboard">Login / Signup</Link>
           </Button>
         </nav>
       </header>
       <main className="flex-1">
+        <section className="w-full py-12 md:py-16 lg:py-20 bg-secondary/50">
+          <div className="container px-4 md:px-6">
+            <div className="w-full max-w-3xl mx-auto">
+              <div className="flex flex-col md:flex-row gap-2">
+                <div className="relative flex-1">
+                  <MapPin className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Location" className="pl-8" />
+                </div>
+                <div className="relative flex-[2]">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Search doctors, clinics, hospitals, etc." className="pl-8" />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+               <ServiceCard
+                  imageUrl="https://placehold.co/400x400.png"
+                  imageHint="doctor video call"
+                  title="Instant Video Consultation"
+                  description="Connect within 60 secs"
+                  href="/dashboard"
+                />
+                <ServiceCard
+                  imageUrl="https://placehold.co/400x400.png"
+                  imageHint="female doctor portrait"
+                  title="Find Doctors Near You"
+                  description="Confirmed appointments"
+                  href="/doctors"
+                />
+                <ServiceCard
+                  imageUrl="https://placehold.co/400x400.png"
+                  imageHint="surgeon in operating room"
+                  title="Surgeries"
+                  description="Safe and trusted surgery centers"
+                  href="/hospitals"
+                />
+            </div>
+          </div>
+        </section>
+
         <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-headline">
-                    Your Trusted Partner in Health and Wellness
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Easily find doctors, book appointments, manage your health records, and more. Sanjiwani Health is here to simplify your healthcare journey.
+            <div className="container px-4 md:px-6 flex flex-col items-center text-center">
+                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
+                    Consult top doctors online for any health concern
+                  </h2>
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl mt-2">
+                    Private online consultations with verified doctors in all specialists.
                   </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" asChild variant="default">
-                    <Link href="/dashboard" className="inline-flex items-center gap-2">
-                      Book an Appointment <ArrowRight className="h-4 w-4" />
-                    </Link>
+                  <Button asChild variant="outline" className="mt-6">
+                      <Link href="/doctors">View All Specialities</Link>
                   </Button>
-                   <Button size="lg" asChild variant="outline">
-                    <Link href="/dashboard">
-                      Access Dashboard
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-              <Image
-                src="https://placehold.co/600x400.png"
-                width="600"
-                height="400"
-                alt="Hero"
-                data-ai-hint="doctor patient consultation"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-              />
             </div>
-          </div>
         </section>
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Our Features</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Comprehensive Healthcare at Your Fingertips</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  We provide a complete suite of tools to manage your health needs efficiently and securely.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 pt-12">
-              <FeatureCard icon={<Stethoscope className="w-8 h-8 text-primary" />} title="Doctor Discovery" description="Find top-rated doctors and specialists near you." />
-              <FeatureCard icon={<FlaskConical className="w-8 h-8 text-primary" />} title="Diagnostic Booking" description="Schedule lab tests and checkups with ease." />
-              <FeatureCard icon={<Hospital className="w-8 h-8 text-primary" />} title="Hospital Search" description="Locate hospitals and clinics with detailed information." />
-              <FeatureCard icon={<FileText className="w-8 h-8 text-primary" />} title="Health Records" description="Securely store and access your medical records anytime." />
-            </div>
-          </div>
-        </section>
+
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-muted-foreground">&copy; 2024 Sanjiwani Health. All rights reserved.</p>
@@ -96,12 +101,25 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function ServiceCard({ imageUrl, imageHint, title, description, href }: { imageUrl: string; imageHint: string; title: string; description: string, href: string }) {
   return (
-    <div className="grid gap-2">
-      <div className="flex justify-center">{icon}</div>
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
-    </div>
+    <Link href={href}>
+      <Card className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300">
+        <CardContent className="p-0">
+           <Image
+              src={imageUrl}
+              width="400"
+              height="400"
+              alt={title}
+              data-ai-hint={imageHint}
+              className="w-full aspect-square object-cover"
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-bold">{title}</h3>
+              <p className="text-sm text-muted-foreground">{description}</p>
+            </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
