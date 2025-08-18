@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, LocateFixed } from 'lucide-react';
+import { MapPin, Search, LocateFixed, CalendarPlus } from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
 import { useToast } from "@/hooks/use-toast"
 
@@ -82,7 +82,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                <ServiceCard
                   imageUrl="https://placehold.co/400x400.png"
                   imageHint="doctor video call"
@@ -95,6 +95,13 @@ export default function Home() {
                   imageHint="female doctor portrait"
                   title="Find Doctors Near You"
                   description="Confirmed appointments"
+                  href="/doctors"
+                />
+                 <ServiceCard
+                  imageUrl="https://placehold.co/400x400.png"
+                  imageHint="calendar appointment"
+                  title="Book an Instant Appointment"
+                  description="Quick and easy scheduling"
                   href="/doctors"
                 />
                 <ServiceCard
@@ -145,8 +152,8 @@ function ServiceCard({ imageUrl, imageHint, title, description, href }: { imageU
         <CardContent className="p-0">
            <Image
               src={imageUrl}
-              width="400"
-              height="400"
+              width="200"
+              height="200"
               alt={title}
               data-ai-hint={imageHint}
               className="w-full aspect-square object-cover"
