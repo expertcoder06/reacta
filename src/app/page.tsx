@@ -1,12 +1,45 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search } from 'lucide-react';
+import { MapPin, Search, LocateFixed } from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
+import { useToast } from "@/hooks/use-toast"
 
 export default function Home() {
+  const { toast } = useToast()
+
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          toast({
+            title: "Location Accessed",
+            description: `Your coordinates are: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+          })
+        },
+        (error) => {
+           toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: `Error getting location: ${error.message}`,
+          })
+        }
+      );
+    } else {
+       toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Geolocation is not supported by this browser.",
+      })
+    }
+  };
+
+
   return (
     <div className="flex flex-col min-h-[100dvh] bg-background">
       <header className="px-4 lg:px-6 h-16 flex items-center border-b shrink-0">
@@ -36,7 +69,11 @@ export default function Home() {
               <div className="flex flex-col md:flex-row gap-2">
                 <div className="relative flex-1">
                   <MapPin className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Location" className="pl-8" />
+                  <Input placeholder="Location" className="pl-8 pr-10" />
+                   <Button variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8" onClick={handleLocationClick}>
+                      <LocateFixed className="h-4 w-4" />
+                      <span className="sr-only">Use my location</span>
+                   </Button>
                 </div>
                 <div className="relative flex-[2]">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
