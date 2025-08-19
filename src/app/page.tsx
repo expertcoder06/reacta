@@ -57,6 +57,12 @@ export default function Home() {
            <Link href="/hospitals" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Surgeries
           </Link>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Blogs
+          </Link>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            For Doctors
+          </Link>
           <Button asChild variant="outline">
             <Link href="/dashboard">Login / Signup</Link>
           </Button>
@@ -156,12 +162,12 @@ export default function Home() {
           <div className="space-y-4">
             <h4 className="font-semibold">For doctors</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Practo Profile</Link></li>
+              <li><Link href="#" className="hover:underline">Sanjiwani Profile</Link></li>
             </ul>
              <h4 className="font-semibold pt-4">For clinics</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Ray by Practo</Link></li>
-              <li><Link href="#" className="hover:underline">Practo Reach</Link></li>
+              <li><Link href="#" className="hover:underline">Ray by Sanjiwani</Link></li>
+              <li><Link href="#" className="hover:underline">Sanjiwani Reach</Link></li>
             </ul>
           </div>
           <div className="space-y-4">
