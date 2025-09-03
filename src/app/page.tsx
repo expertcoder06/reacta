@@ -42,9 +42,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-[100dvh] bg-background">
-      <header className="px-4 lg:px-6 h-16 flex items-center border-b shrink-0">
+      <header className="px-4 lg:px-6 h-16 flex items-center bg-primary text-primary-foreground shrink-0">
         <Link href="/" className="flex items-center justify-center gap-2" prefetch={false}>
-          <SanjiwaniLogo className="h-6 w-6 text-primary" />
+          <SanjiwaniLogo className="h-6 w-6" />
           <span className="font-semibold text-lg">Sanjiwani Health</span>
         </Link>
         <nav className="ml-auto flex items-center gap-4 sm:gap-6">
@@ -63,7 +63,7 @@ export default function Home() {
           <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             For Doctors
           </Link>
-          <Button asChild variant="outline">
+          <Button asChild variant="secondary">
             <Link href="/dashboard">Login / Signup</Link>
           </Button>
         </nav>
@@ -90,28 +90,28 @@ export default function Home() {
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                  <ServiceCard
-                  imageUrl="https://placehold.co/200x200.png"
+                  imageUrl="https://picsum.photos/200/200"
                   imageHint="calendar appointment"
                   title="Book an Instant Appointment"
                   description="Quick and easy scheduling"
                   href="/doctors"
                 />
                <ServiceCard
-                  imageUrl="https://placehold.co/200x200.png"
+                  imageUrl="https://picsum.photos/200/200"
                   imageHint="doctor video"
                   title="Instant Video Consultation"
                   description="Connect within 60 secs"
                   href="/dashboard"
                 />
                 <ServiceCard
-                  imageUrl="https://placehold.co/200x200.png"
+                  imageUrl="https://picsum.photos/200/200"
                   imageHint="female doctor"
                   title="Find Doctors Near You"
                   description="Confirmed appointments"
                   href="/doctors"
                 />
                 <ServiceCard
-                  imageUrl="https://placehold.co/200x200.png"
+                  imageUrl="https://picsum.photos/200/200"
                   imageHint="operating room"
                   title="Surgeries"
                   description="Safe and trusted surgery centers"
