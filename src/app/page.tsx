@@ -1,236 +1,521 @@
+// src/app/page.tsx
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView, Variants } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, LocateFixed, CalendarPlus, Facebook, Twitter, Youtube, Linkedin, Github } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import {
+  Heart,
+  FileText,
+  ShieldCheck,
+  Zap,
+  Star,
+  CheckCircle,
+  Mail,
+  Twitter,
+  Linkedin,
+  Facebook,
+} from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
-import { useToast } from "@/hooks/use-toast"
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
-export default function Home() {
-  const { toast } = useToast()
+// --- ANIMATION VARIANTS --- //
 
-  const handleLocationClick = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          toast({
-            title: "Location Accessed",
-            description: `Your coordinates are: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
-          })
-        },
-        (error) => {
-           toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: `Error getting location: ${error.message}`,
-          })
-        }
-      );
-    } else {
-       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "Geolocation is not supported by this browser.",
-      })
-    }
-  };
+const motionVariants: { [key: string]: Variants } = {
+  staggerContainer: {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  },
+  fadeIn: {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
+  },
+  slideUp: (delay = 0) => ({
+    hidden: { y: 20, opacity: 0 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut',
+        delay,
+      },
+    },
+  }),
+  cardHover: {
+    scale: 1.05,
+    transition: { type: 'spring', stiffness: 400, damping: 10 },
+  },
+};
 
+// --- SUBCOMPONENTS --- //
+
+const Header = () => {
+  return (
+    <motion.header
+      initial="hidden"
+      animate="show"
+      variants={motionVariants.fadeIn}
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    >
+      <div className="container flex h-16 items-center">
+        <Link href="/" className="mr-6 flex items-center space-x-2">
+          <SanjiwaniLogo className="h-6 w-6 text-primary" />
+          <span className="font-bold sm:inline-block">Sanjiwani Health</span>
+        </Link>
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="#features" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Features
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="#pricing" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Pricing
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="#testimonials" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Testimonials
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <div className="flex flex-1 items-center justify-end space-x-4">
+          <Button variant="ghost" asChild>
+            <Link href="/dashboard">Login</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/dashboard">Get Started</Link>
+          </Button>
+        </div>
+      </div>
+    </motion.header>
+  );
+};
+
+const Hero = () => {
+  return (
+    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+      <motion.div
+        className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center"
+        variants={motionVariants.staggerContainer}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.h1
+          className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
+          variants={motionVariants.slideUp()}
+        >
+          Sanjiwani Health — Telehealth & Digital Records for Everyone
+        </motion.h1>
+        <motion.p
+          className="max-w-xl text-muted-foreground sm:text-xl"
+          variants={motionVariants.slideUp(0.2)}
+        >
+          Your health, simplified. Access doctors, manage records, and take control of your well-being, all in one place.
+        </motion.p>
+        <motion.div
+          className="flex gap-4"
+          variants={motionVariants.slideUp(0.4)}
+        >
+          <Button size="lg" asChild>
+            <Link href="/dashboard">Get Started Free</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="#how-it-works">See Demo</Link>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+const TrustBadges = () => {
+  const logos = ['HIPAA Compliant', '10,000+ Patients', '5-Star Rated'];
+  return (
+    <motion.div
+      className="container mx-auto flex flex-wrap justify-center items-center gap-x-8 gap-y-4"
+      variants={motionVariants.fadeIn}
+      initial="hidden"
+      animate="show"
+    >
+      <p className="text-sm font-semibold text-muted-foreground">TRUSTED BY THOUSANDS</p>
+      {logos.map((logo, index) => (
+        <div key={index} className="flex items-center gap-2 text-muted-foreground">
+          <CheckCircle className="h-4 w-4" />
+          <span className="text-sm font-medium">{logo}</span>
+        </div>
+      ))}
+    </motion.div>
+  );
+};
+
+const Features = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const features = [
+    { icon: Zap, title: 'Instant Telehealth', desc: 'Connect with certified doctors within minutes, anytime, anywhere.' },
+    { icon: FileText, title: 'Digital Health Records', desc: 'Securely store and access all your medical history in one place.' },
+    { icon: ShieldCheck, title: 'Private & Secure', desc: 'Your data is encrypted and protected with industry-leading security.' },
+  ];
 
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-background">
-      <header className="px-4 lg:px-6 h-16 flex items-center bg-primary text-primary-foreground shrink-0">
-        <Link href="/" className="flex items-center justify-center gap-2" prefetch={false}>
-          <SanjiwaniLogo className="h-6 w-6" />
-          <span className="font-semibold text-lg">Sanjiwani Health</span>
-        </Link>
-        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
-          <Link href="/doctors" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Find Doctors
-          </Link>
-          <Link href="/dashboard" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Video Consult
-          </Link>
-           <Link href="/hospitals" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Surgeries
-          </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Blogs
-          </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            For Doctors
-          </Link>
-          <Button asChild variant="secondary">
-            <Link href="/dashboard">Login / Signup</Link>
-          </Button>
-        </nav>
-      </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-16 lg:py-20 bg-secondary/50">
-          <div className="container px-4 md:px-6">
-            <div className="w-full max-w-3xl mx-auto">
-              <div className="flex flex-col md:flex-row gap-2">
-                <div className="relative flex-1">
-                  <MapPin className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Location" className="pl-8 pr-10" />
-                   <Button variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8" onClick={handleLocationClick}>
-                      <LocateFixed className="h-4 w-4" />
-                      <span className="sr-only">Use my location</span>
-                   </Button>
-                </div>
-                <div className="relative flex-[2]">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search doctors, clinics, hospitals, etc." className="pl-8" />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                 <ServiceCard
-                  imageUrl="https://picsum.photos/200/200"
-                  imageHint="calendar appointment"
-                  title="Book an Instant Appointment"
-                  description="Quick and easy scheduling"
-                  href="/doctors"
-                />
-               <ServiceCard
-                  imageUrl="https://picsum.photos/200/200"
-                  imageHint="doctor video"
-                  title="Instant Video Consultation"
-                  description="Connect within 60 secs"
-                  href="/dashboard"
-                />
-                <ServiceCard
-                  imageUrl="https://picsum.photos/200/200"
-                  imageHint="female doctor"
-                  title="Find Doctors Near You"
-                  description="Confirmed appointments"
-                  href="/doctors"
-                />
-                <ServiceCard
-                  imageUrl="https://picsum.photos/200/200"
-                  imageHint="operating room"
-                  title="Surgeries"
-                  description="Safe and trusted surgery centers"
-                  href="/hospitals"
-                />
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6 flex flex-col items-center text-center">
-                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
-                    Consult top doctors online for any health concern
-                  </h2>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl mt-2">
-                    Private online consultations with verified doctors in all specialists.
-                  </p>
-                  <Button asChild variant="outline" className="mt-6">
-                      <Link href="/doctors">View All Specialities</Link>
-                  </Button>
-            </div>
-        </section>
-
-      </main>
-      <footer className="bg-primary text-primary-foreground py-12">
-        <div className="container mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-6 gap-8">
-          <div className="space-y-4">
-            <h4 className="font-semibold">Sanjiwani</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">About</Link></li>
-              <li><Link href="#" className="hover:underline">Blog</Link></li>
-              <li><Link href="#" className="hover:underline">Careers</Link></li>
-              <li><Link href="#" className="hover:underline">Press</Link></li>
-              <li><Link href="#" className="hover:underline">Contact Us</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-semibold">For patients</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/doctors" className="hover:underline">Search for doctors</Link></li>
-              <li><Link href="#" className="hover:underline">Search for clinics</Link></li>
-              <li><Link href="/hospitals" className="hover:underline">Search for hospitals</Link></li>
-              <li><Link href="#" className="hover:underline">Book a test</Link></li>
-              <li><Link href="#" className="hover:underline">Order medicines</Link></li>
-              <li><Link href="/records" className="hover:underline">Read health articles</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-semibold">For doctors</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Sanjiwani Profile</Link></li>
-            </ul>
-             <h4 className="font-semibold pt-4">For clinics</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Ray by Sanjiwani</Link></li>
-              <li><Link href="#" className="hover:underline">Sanjiwani Reach</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-semibold">For hospitals</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Insta by Sanjiwani</Link></li>
-              <li><Link href="#" className="hover:underline">Qikwell by Sanjiwani</Link></li>
-              <li><Link href="#" className="hover:underline">Sanjiwani Profile</Link></li>
-              <li><Link href="#" className="hover:underline">Sanjiwani Reach</Link></li>
-            </ul>
-             <h4 className="font-semibold pt-4">For Corporates</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Wellness Plans</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-semibold">More</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:underline">Help</Link></li>
-              <li><Link href="#" className="hover:underline">Developers</Link></li>
-              <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:underline">Terms & Conditions</Link></li>
-              <li><Link href="#" className="hover:underline">Healthcare Directory</Link></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h4 className="font-semibold">Social</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Facebook className="w-4 h-4" /> Facebook</Link></li>
-              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Twitter className="w-4 h-4" /> Twitter</Link></li>
-              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Youtube className="w-4 h-4" /> Youtube</Link></li>
-              <li><Link href="#" className="flex items-center gap-2 hover:underline"><Linkedin className="w-4 h-4" /> LinkedIn</Link></li>
-               <li><Link href="#" className="flex items-center gap-2 hover:underline"><Github className="w-4 h-4" /> Github</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 md:px-6 mt-8 text-center text-sm">
-            <p>&copy; 2024 Sanjiwani Health. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+    <section id="features" ref={ref} className="container space-y-6 bg-secondary/50 py-12 md:py-24 rounded-lg">
+      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Everything You Need for Better Health</h2>
+        <p className="mt-2 max-w-xl text-muted-foreground">
+          Sanjiwani provides powerful tools to make healthcare more accessible and convenient.
+        </p>
+      </div>
+      <motion.div
+        className="mx-auto grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-3"
+        variants={motionVariants.staggerContainer}
+        initial="hidden"
+        animate={isInView ? 'show' : 'hidden'}
+      >
+        {features.map((feature, i) => (
+          <motion.div key={i} variants={motionVariants.slideUp()}>
+            <motion.div whileHover="scale" variants={motionVariants.cardHover}>
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="bg-primary/10 text-primary p-3 rounded-full w-fit mb-4">
+                    <feature.icon className="h-6 w-6" />
+                  </div>
+                  <CardTitle>{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{feature.desc}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
   );
+};
+
+const HowItWorks = () => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.5 });
+    const steps = [
+        { num: 1, title: 'Create Your Account', desc: 'Sign up for free in just a few minutes.' },
+        { num: 2, title: 'Find a Doctor', desc: 'Search for specialists and book an appointment.' },
+        { num: 3, title: 'Start Your Consultation', desc: 'Connect via video call and get expert medical advice.' },
+    ];
+
+    return (
+        <section id="how-it-works" ref={ref} className="container py-12 md:py-24">
+            <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Get Started in 3 Easy Steps</h2>
+                <p className="mt-2 max-w-xl text-muted-foreground">Healthcare that fits into your life, not the other way around.</p>
+            </div>
+            <motion.div
+                className="mt-12 grid gap-8 md:grid-cols-3"
+                variants={motionVariants.staggerContainer}
+                initial="hidden"
+                animate={isInView ? 'show' : 'hidden'}
+            >
+                {steps.map((step) => (
+                    <motion.div key={step.num} variants={motionVariants.slideUp()} className="flex items-start space-x-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-xl">{step.num}</div>
+                        <div>
+                            <h3 className="text-xl font-semibold">{step.title}</h3>
+                            <p className="mt-1 text-muted-foreground">{step.desc}</p>
+                        </div>
+                    </motion.div>
+                ))}
+            </motion.div>
+        </section>
+    );
+};
+
+const Testimonials = () => {
+  const testimonials = [
+    { name: 'Sarah L.', quote: "Sanjiwani Health changed my life. I can talk to a doctor from home and all my records are finally organized!", avatar: 'SL' },
+    { name: 'John D.', quote: "The platform is incredibly easy to use. I found a specialist and had a video call booked within 10 minutes. Amazing!", avatar: 'JD' },
+    { name: 'Meghan P.', quote: "As a parent, having access to pediatricians 24/7 is a game-changer. I feel so much more at ease.", avatar: 'MP' },
+    { name: 'Carlos R.', quote: "Finally, a healthcare app that just works. Secure, fast, and reliable. Highly recommended.", avatar: 'CR' },
+  ];
+
+  return (
+    <section id="testimonials" className="container py-12 md:py-24">
+        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Loved by Patients Everywhere</h2>
+            <p className="mt-2 max-w-xl text-muted-foreground">Don't just take our word for it. Here's what our users are saying.</p>
+        </div>
+        <Carousel className="mt-12 w-full max-w-4xl mx-auto"
+            opts={{
+                align: "start",
+                loop: true,
+            }}
+        >
+            <CarouselContent>
+                {testimonials.map((testimonial, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <div className="p-1 h-full">
+                            <Card className="h-full flex flex-col justify-between">
+                                <CardContent className="pt-6">
+                                    <p className="italic">"{testimonial.quote}"</p>
+                                </CardContent>
+                                <CardHeader className="flex-row items-center gap-4 pt-0">
+                                    <Avatar>
+                                        {/* TODO: Replace with real user avatars */}
+                                        <AvatarImage src={`https://picsum.photos/seed/${index + 10}/40/40`} alt={testimonial.name} />
+                                        <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <p className="font-semibold">{testimonial.name}</p>
+                                        <div className="flex items-center gap-0.5">
+                                            {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-primary text-primary" />)}
+                                        </div>
+                                    </div>
+                                </CardHeader>
+                            </Card>
+                        </div>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
+        </Carousel>
+    </section>
+  );
+};
+
+
+const Pricing = () => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+    const plans = [
+        {
+            name: "Free",
+            price: "$0",
+            desc: "For individuals getting started.",
+            features: ["Secure Digital Records", "Search for Doctors", "1 Telehealth Call/Month"],
+            cta: "Start for Free"
+        },
+        {
+            name: "Pro",
+            price: "$15",
+            desc: "For individuals and families.",
+            features: ["Everything in Free, plus:", "Unlimited Telehealth Calls", "Family Account Sharing", "Priority Support"],
+            isPopular: true,
+            cta: "Go Pro"
+        },
+    ];
+
+    return (
+        <section id="pricing" ref={ref} className="container py-12 md:py-24">
+            <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Simple, Transparent Pricing</h2>
+                <p className="mt-2 max-w-xl text-muted-foreground">Choose the plan that's right for you. No hidden fees.</p>
+            </div>
+
+            <motion.div
+                className="mt-12 grid gap-8 md:grid-cols-2 max-w-3xl mx-auto"
+                variants={motionVariants.staggerContainer}
+                initial="hidden"
+                animate={isInView ? "show" : "hidden"}
+            >
+                {plans.map((plan) => (
+                    <motion.div key={plan.name} variants={motionVariants.slideUp()}>
+                        <Card className={cn("flex flex-col h-full", plan.isPopular && "border-primary ring-2 ring-primary")}>
+                            {plan.isPopular && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
+                            <CardHeader>
+                                <CardTitle className="text-xl">{plan.name}</CardTitle>
+                                <p className="text-4xl font-bold">
+                                    {plan.price}<span className="text-sm font-normal text-muted-foreground">/month</span>
+                                </p>
+                                <p className="text-muted-foreground">{plan.desc}</p>
+                            </CardHeader>
+                            <CardContent className="flex-1 space-y-4">
+                                <ul className="space-y-2">
+                                    {plan.features.map(feature => (
+                                        <li key={feature} className="flex items-center gap-2">
+                                            <CheckCircle className="h-4 w-4 text-primary" />
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </CardContent>
+                            <div className="p-6 pt-0">
+                                <Button className="w-full" variant={plan.isPopular ? "default" : "outline"}>{plan.cta}</Button>
+                            </div>
+                        </Card>
+                    </motion.div>
+                ))}
+            </motion.div>
+        </section>
+    );
+};
+
+
+const NewsletterSignUp = () => {
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+    
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email || !/\S+@\S+\.\S+/.test(email)) {
+            setError('Please enter a valid email address.');
+            return;
+        }
+        setError('');
+        // TODO: Implement actual newsletter signup logic
+        console.log('Newsletter signup for:', email);
+        alert(`Thank you for signing up with ${email}!`);
+        setEmail('');
+    };
+
+    return (
+        <section id="signup" className="bg-secondary/50">
+            <div className="container py-12 md:py-24">
+                <div className="mx-auto max-w-2xl text-center">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Stay Updated on Your Health</h2>
+                    <p className="mt-2 text-muted-foreground">
+                        Subscribe to our newsletter for the latest health tips and platform updates.
+                    </p>
+                    <form onSubmit={handleSubmit} className="mt-6 flex max-w-md mx-auto">
+                        <div className="relative flex-1">
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                          <Input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            className="pl-10"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            aria-label="Email for newsletter"
+                          />
+                        </div>
+                        <Button type="submit">Subscribe</Button>
+                    </form>
+                    {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
+                </div>
+            </div>
+        </section>
+    );
 }
 
-function ServiceCard({ imageUrl, imageHint, title, description, href }: { imageUrl: string; imageHint: string; title: string; description: string, href: string }) {
+const Footer = () => {
+  const footerLinks = {
+    'Company': [
+      { title: 'About', href: '#' },
+      { title: 'Blog', href: '#' },
+      { title: 'Careers', href: '#' },
+    ],
+    'Support': [
+      { title: 'Contact Us', href: 'mailto:support@sanjiwani.health' },
+      { title: 'FAQ', href: '#' },
+      { title: 'Privacy Policy', href: '#' },
+      { title: 'Terms of Service', href: '#' },
+    ],
+  };
+
   return (
-    <Link href={href}>
-      <Card className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300">
-        <CardContent className="p-0">
-           <Image
-              src={imageUrl}
-              width="200"
-              height="200"
-              alt={title}
-              data-ai-hint={imageHint}
-              className="w-full aspect-square object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">{title}</h3>
-              <p className="text-sm text-muted-foreground">{description}</p>
+    <footer className="bg-background border-t">
+      <div className="container py-12">
+        <div className="grid gap-8 md:grid-cols-4">
+          <div className="md:col-span-1">
+            <Link href="/" className="flex items-center space-x-2">
+              <SanjiwaniLogo className="h-6 w-6 text-primary" />
+              <span className="font-bold">Sanjiwani Health</span>
+            </Link>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your health journey, simplified.
+            </p>
+            <div className="mt-4 flex space-x-4">
+              <Link href="#" aria-label="Twitter"><Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
+              <Link href="#" aria-label="LinkedIn"><Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
+              <Link href="#" aria-label="Facebook"><Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
             </div>
-        </CardContent>
-      </Card>
-    </Link>
-  )
+          </div>
+          {Object.entries(footerLinks).map(([title, links]) => (
+            <div key={title}>
+              <h4 className="font-semibold">{title}</h4>
+              <ul className="mt-4 space-y-2">
+                {links.map(link => (
+                  <li key={link.title}>
+                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground">
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} Sanjiwani Health. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+
+// --- MAIN PAGE COMPONENT --- //
+
+export default function LandingPage() {
+  // Respects user's motion preference
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return (
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+        <Header />
+        <main className="flex-1">
+            <Hero />
+            <TrustBadges />
+            <div className="my-12" />
+            <Features />
+            <HowItWorks />
+            <Testimonials />
+            <Pricing />
+            <NewsletterSignUp />
+        </main>
+        <Footer />
+    </div>
+  );
 }
