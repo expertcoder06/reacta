@@ -90,35 +90,35 @@ const Header = () => {
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="#features" legacyBehavior passHref>
+              <Link href="#features" passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Features
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="#pricing" legacyBehavior passHref>
+              <Link href="#pricing" passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Pricing
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="#testimonials" legacyBehavior passHref>
+              <Link href="#testimonials" passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Testimonials
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/blogs" legacyBehavior passHref>
+              <Link href="/blogs" passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Blogs
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/for-doctors" legacyBehavior passHref>
+              <Link href="/for-doctors" passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   For Doctors
                 </NavigationMenuLink>
