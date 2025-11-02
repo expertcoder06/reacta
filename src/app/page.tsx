@@ -80,33 +80,47 @@ const Header = () => {
       initial="hidden"
       animate="show"
       variants={motionVariants.fadeIn}
-      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="sticky top-0 z-50 w-full border-b bg-primary text-primary-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <SanjiwaniLogo className="h-6 w-6 text-primary" />
+          <SanjiwaniLogo className="h-6 w-6" />
           <span className="font-bold sm:inline-block">Sanjiwani Health</span>
         </Link>
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="#features" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Features
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#pricing" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Pricing
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#testimonials" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Testimonials
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/blogs" legacyBehavior passHref>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                  Blogs
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/for-doctors" legacyBehavior passHref>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                  For Doctors
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -116,7 +130,7 @@ const Header = () => {
           <Button variant="ghost" asChild>
             <Link href="/dashboard">Login</Link>
           </Button>
-          <Button asChild>
+          <Button variant="secondary" asChild>
             <Link href="/dashboard">Get Started</Link>
           </Button>
         </div>
@@ -432,45 +446,50 @@ const NewsletterSignUp = () => {
 }
 
 const Footer = () => {
-  const footerLinks = {
-    'Company': [
-      { title: 'About', href: '#' },
-      { title: 'Blog', href: '#' },
-      { title: 'Careers', href: '#' },
+  const currentYear = new Date().getFullYear();
+  const footerSections = {
+    "For patients": [
+      { title: "Search for doctors", href: "#" },
+      { title: "Search for clinics", href: "#" },
+      { title: "Search for hospitals", href: "#" },
+      { title: "Book a diagnostic test", href: "#" },
+      { title: "Book full body checkups", href: "#" },
+      { title: "Read health articles", href: "#" },
     ],
-    'Support': [
-      { title: 'Contact Us', href: 'mailto:support@sanjiwani.health' },
-      { title: 'FAQ', href: '#' },
-      { title: 'Privacy Policy', href: '#' },
-      { title: 'Terms of Service', href: '#' },
+    "For doctors": [
+      { title: "Sanjiwani for doctors", href: "#" },
+      { title: "Sanjiwani Profile", href: "#" },
+    ],
+    "For hospitals": [
+      { title: "Sanjiwani Profile", href: "#" },
+      { title: "Sanjiwani Reach", href: "#" },
+    ],
+    "For Corporates": [{ title: "Wellness program", href: "#" }],
+    "More": [
+      { title: "Help", href: "#" },
+      { title: "Developers", href: "#" },
+      { title: "Privacy Policy", href: "#" },
+      { title: "Terms and Conditions", href: "#" },
+    ],
+    "Social": [
+      { title: "Facebook", href: "#" },
+      { title: "Twitter", href: "#" },
+      { title: "LinkedIn", href: "#" },
+      { title: "YouTube", href: "#" },
     ],
   };
 
   return (
-    <footer className="bg-background border-t">
+    <footer className="bg-blue-900 text-white">
       <div className="container py-12">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center space-x-2">
-              <SanjiwaniLogo className="h-6 w-6 text-primary" />
-              <span className="font-bold">Sanjiwani Health</span>
-            </Link>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Your health journey, simplified.
-            </p>
-            <div className="mt-4 flex space-x-4">
-              <Link href="#" aria-label="Twitter"><Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
-              <Link href="#" aria-label="LinkedIn"><Linkedin className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
-              <Link href="#" aria-label="Facebook"><Facebook className="h-5 w-5 text-muted-foreground hover:text-foreground" /></Link>
-            </div>
-          </div>
-          {Object.entries(footerLinks).map(([title, links]) => (
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+          {Object.entries(footerSections).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-semibold">{title}</h4>
-              <ul className="mt-4 space-y-2">
-                {links.map(link => (
+              <h4 className="font-bold mb-4">{title}</h4>
+              <ul className="space-y-2">
+                {links.map((link) => (
                   <li key={link.title}>
-                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground">
+                    <Link href={link.href} className="text-sm text-gray-300 hover:text-white">
                       {link.title}
                     </Link>
                   </li>
@@ -479,8 +498,14 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Sanjiwani Health. All rights reserved.</p>
+        <div className="mt-12 border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <SanjiwaniLogo className="h-8 w-8" />
+            <span className="font-bold text-lg">Sanjiwani Health</span>
+          </div>
+          <p className="text-sm text-gray-400 mt-4 md:mt-0">
+            &copy; {currentYear} Sanjiwani Health. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
