@@ -153,7 +153,7 @@ const Hero = () => {
           className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
           variants={motionVariants.slideUp()}
         >
-          Sanjiwani Health — Telehealth & Digital Records for Everyone
+          Sanjiwani Health - A Unified Digital Healthcare Platform
         </motion.h1>
         <motion.p
           className="max-w-xl text-muted-foreground sm:text-xl"
