@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView, Variants } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -31,9 +31,9 @@ import {
   Star,
   CheckCircle,
   Mail,
-  Twitter,
-  Linkedin,
-  Facebook,
+  Stethoscope,
+  Hospital,
+  FlaskConical,
 } from 'lucide-react';
 import { SanjiwaniLogo } from '@/components/icons';
 import { cn } from '@/lib/utils';
@@ -92,35 +92,35 @@ const Header = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="#features" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Features
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#pricing" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Pricing
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#testimonials" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Testimonials
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
                <Link href="/blogs" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Blogs
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/for-doctors" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   For Doctors
                 </NavigationMenuLink>
               </Link>
@@ -196,6 +196,52 @@ const TrustBadges = () => {
     </motion.div>
   );
 };
+
+const QuickAccess = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const quickAccessItems = [
+    { icon: Stethoscope, title: 'Find Doctors', desc: 'Consult with verified specialists.', href: "/doctors" },
+    { icon: Hospital, title: 'Hospitals', desc: 'Real-time bed availability', href: "/hospitals" },
+    { icon: FlaskConical, title: 'Diagnostics', desc: 'Book lab tests & health checkups', href: "/diagnostics" },
+    { icon: Heart, title: 'Emergency', desc: '24/7 emergency services', href: "#" },
+  ];
+
+  return (
+    <section id="quick-access" ref={ref} className="container space-y-6 py-12 md:py-24">
+      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">Quick Access to Healthcare</h2>
+        <p className="mt-2 max-w-xl text-muted-foreground">
+          Everything you need for your health journey in one place.
+        </p>
+      </div>
+      <motion.div
+        className="mx-auto grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-4"
+        variants={motionVariants.staggerContainer}
+        initial="hidden"
+        animate={isInView ? 'show' : 'hidden'}
+      >
+        {quickAccessItems.map((item, i) => (
+          <motion.div key={i} variants={motionVariants.slideUp()}>
+            <Link href={item.href}>
+              <motion.div whileHover="scale" variants={motionVariants.cardHover} className="h-full">
+                <Card className="h-full text-center p-6 flex flex-col items-center justify-center">
+                  <div className="mb-4 text-primary">
+                    <item.icon className="h-10 w-10" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm">{item.desc}</p>
+                </Card>
+              </motion.div>
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+};
+
 
 const Features = () => {
   const ref = useRef(null);
@@ -535,6 +581,7 @@ export default function LandingPage() {
             <Hero />
             <TrustBadges />
             <div className="my-12" />
+            <QuickAccess />
             <Features />
             <HowItWorks />
             <Testimonials />
@@ -545,5 +592,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-    
