@@ -81,46 +81,46 @@ const Header = () => {
       initial="hidden"
       animate="show"
       variants={motionVariants.fadeIn}
-      className="sticky top-0 z-50 w-full border-b bg-primary text-primary-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="sticky top-0 z-50 w-full border-b bg-background/80 text-foreground backdrop-blur"
     >
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <SanjiwaniLogo className="h-6 w-6" />
+          <SanjiwaniLogo className="h-6 w-6 text-primary" />
           <span className="font-bold sm:inline-block">Sanjiwani Health</span>
         </Link>
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="#features" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Features
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#pricing" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Pricing
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="#testimonials" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Testimonials
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
                <Link href="/blogs" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Blogs
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/for-doctors" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   For Doctors
                 </NavigationMenuLink>
               </Link>
@@ -131,7 +131,7 @@ const Header = () => {
           <Button variant="ghost" asChild>
             <Link href="/dashboard">Login</Link>
           </Button>
-          <Button variant="secondary" asChild>
+          <Button asChild>
             <Link href="/dashboard">Get Started</Link>
           </Button>
         </div>
