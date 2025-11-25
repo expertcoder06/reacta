@@ -1,4 +1,5 @@
 
+
 // src/app/page.tsx
 'use client';
 
@@ -38,6 +39,7 @@ import {
 import { SanjiwaniLogo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // --- ANIMATION VARIANTS --- //
 
@@ -247,6 +249,7 @@ const MsmeSection = () => {
                 variants={motionVariants.slideUp()}
                 className="max-w-5xl mx-auto text-center"
             >
+                <Image src="https://storage.googleapis.com/aai-web-samples/msme.png" alt="MSME Logo" width={150} height={150} className="mx-auto mb-8" />
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground font-headline">
                     Government Recognised MSME
                 </h2>
