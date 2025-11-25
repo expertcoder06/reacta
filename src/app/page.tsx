@@ -98,13 +98,6 @@ const Header = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="#pricing" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                  Pricing
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
               <Link href="#testimonials" legacyBehavior passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Testimonials
@@ -419,75 +412,6 @@ const Testimonials = () => {
   );
 };
 
-
-const Pricing = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-    const plans = [
-        {
-            name: "Free",
-            price: "$0",
-            desc: "For individuals getting started.",
-            features: ["Secure Digital Records", "Search for Doctors", "1 Telehealth Call/Month"],
-            cta: "Start for Free"
-        },
-        {
-            name: "Pro",
-            price: "$15",
-            desc: "For individuals and families.",
-            features: ["Everything in Free, plus:", "Unlimited Telehealth Calls", "Family Account Sharing", "Priority Support"],
-            isPopular: true,
-            cta: "Go Pro"
-        },
-    ];
-
-    return (
-        <section id="pricing" ref={ref} className="container py-12 md:py-24">
-            <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">Simple, Transparent Pricing</h2>
-                <p className="mt-2 max-w-xl text-muted-foreground">Choose the plan that's right for you. No hidden fees.</p>
-            </div>
-
-            <motion.div
-                className="mt-12 grid gap-8 md:grid-cols-2 max-w-3xl mx-auto"
-                variants={motionVariants.staggerContainer}
-                initial="hidden"
-                animate={isInView ? "show" : "hidden"}
-            >
-                {plans.map((plan) => (
-                    <motion.div key={plan.name} variants={motionVariants.slideUp()}>
-                        <Card className={cn("flex flex-col h-full", plan.isPopular && "border-primary ring-2 ring-primary")}>
-                            {plan.isPopular && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>}
-                            <CardHeader>
-                                <CardTitle className="text-xl">{plan.name}</CardTitle>
-                                <p className="text-4xl font-bold">
-                                    {plan.price}<span className="text-sm font-normal text-muted-foreground">/month</span>
-                                </p>
-                                <p className="text-muted-foreground">{plan.desc}</p>
-                            </CardHeader>
-                            <CardContent className="flex-1 space-y-4">
-                                <ul className="space-y-2">
-                                    {plan.features.map(feature => (
-                                        <li key={feature} className="flex items-center gap-2">
-                                            <CheckCircle className="h-4 w-4 text-primary" />
-                                            <span>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </CardContent>
-                            <div className="p-6 pt-0">
-                                <Button className="w-full" variant={plan.isPopular ? "default" : "outline"}>{plan.cta}</Button>
-                            </div>
-                        </Card>
-                    </motion.div>
-                ))}
-            </motion.div>
-        </section>
-    );
-};
-
-
 const NewsletterSignUp = () => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
@@ -628,7 +552,6 @@ export default function LandingPage() {
             <Features />
             <HowItWorks />
             <Testimonials />
-            <Pricing />
             <NewsletterSignUp />
         </main>
         <Footer />
