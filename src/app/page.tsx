@@ -1,5 +1,4 @@
 
-
 // src/app/page.tsx
 'use client';
 
@@ -92,7 +91,7 @@ const Header = () => {
       initial="hidden"
       animate="show"
       variants={motionVariants.fadeIn}
-      className="sticky top-0 z-50 w-full border-b bg-background/80 text-foreground backdrop-blur"
+      className="sticky top-0 z-50 w-full border-b bg-transparent text-foreground backdrop-blur"
     >
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
@@ -101,7 +100,7 @@ const Header = () => {
         </Link>
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
-            <NavigationMenuItem>
+             <NavigationMenuItem>
               <Link href="#features" legacyBehavior passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
                   Features
@@ -258,7 +257,7 @@ const MsmeSection = () => {
                 variants={motionVariants.slideUp()}
                 className="max-w-5xl mx-auto text-center"
             >
-                <Image src="https://storage.googleapis.com/aai-web-samples/msme.png" alt="MSME Logo" width={150} height={150} className="mx-auto mb-8" />
+                <Image src="/msme.png" alt="MSME Logo" width={150} height={150} className="mx-auto mb-8" />
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground font-headline">
                     Government Recognised MSME
                 </h2>
@@ -303,7 +302,7 @@ const InnovationAwardSection = () => {
           animate={isInView ? "show" : "hidden"}
           className="flex justify-center"
         >
-          <Image src="https://storage.googleapis.com/aai-web-samples/sanjiwani-medal.png" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg shadow-2xl object-contain" />
+          <Image src="/sanjiwani-medal.png" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg shadow-2xl object-contain" />
         </motion.div>
         <motion.div
           variants={motionVariants.slideInRight}
