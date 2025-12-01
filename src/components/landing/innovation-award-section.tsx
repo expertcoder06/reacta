@@ -1,4 +1,3 @@
-
 'use client';
 import { useRef } from 'react';
 import Image from 'next/image';
@@ -20,7 +19,7 @@ export const InnovationAwardSection = () => {
           animate={isInView ? "show" : "hidden"}
           className="flex justify-center"
         >
-          <Image src="/sanjiwani-medal.png" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg shadow-2xl object-contain" />
+          <Image src="/sanjiwani-medal.svg" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg object-contain" />
         </motion.div>
         <motion.div
           variants={motionVariants.slideInRight}
