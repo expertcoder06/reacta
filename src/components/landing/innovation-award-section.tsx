@@ -19,7 +19,7 @@ export const InnovationAwardSection = () => {
           animate={isInView ? "show" : "hidden"}
           className="flex justify-center"
         >
-          <Image src="/sanjiwani-medal.svg" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg object-contain" />
+          <Image src="/medal.png" alt="All India Idea & Innovation Competition Medal" width={350} height={500} className="rounded-lg object-contain" />
         </motion.div>
         <motion.div
           variants={motionVariants.slideInRight}
