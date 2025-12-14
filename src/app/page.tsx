@@ -13,11 +13,13 @@ import { Header } from '@/components/landing/header';
 
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-slate-50 text-foreground">
         <Header />
         <main className="flex-1">
             <Hero />
-            <TrustBadges />
+            <div className="bg-white py-12">
+                <TrustBadges />
+            </div>
             <div className="my-12" />
             <QuickAccess />
             <MsmeSection />

@@ -1,42 +1,72 @@
-
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { motionVariants } from '@/lib/animations';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <section className="container grid lg:grid-cols-2 items-center gap-12 pt-8 md:pt-16 pb-12">
       <motion.div
-        className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center"
+        className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6"
         variants={motionVariants.staggerContainer}
         initial="hidden"
         animate="show"
       >
         <motion.h1
-          className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
+          className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
           variants={motionVariants.slideUp(0)}
         >
-          Sanjiwani Health - A Unified Digital Healthcare Platform
+          Your <span className="text-red-500">Health,</span> <br />
+          Connected With Care.
         </motion.h1>
-        <motion.p
-          className="max-w-xl text-muted-foreground sm:text-xl"
+        
+        <motion.div 
+          className="flex items-center gap-4 max-w-md text-muted-foreground sm:text-lg"
           variants={motionVariants.slideUp(0.2)}
         >
-          Your health, simplified. Access doctors, manage records, and take control of your well-being, all in one place.
-        </motion.p>
+            <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+                <ChevronLeft className="h-6 w-6" />
+            </Button>
+            <p>
+                Find trusted clinics and hospitals near you in just a few taps
+            </p>
+            <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+                <ChevronRight className="h-6 w-6" />
+            </Button>
+        </motion.div>
+
         <motion.div
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           variants={motionVariants.slideUp(0.4)}
         >
-          <Button size="lg" asChild>
-            <Link href="/dashboard">Get Started Free</Link>
+          <Button size="lg" className="w-full sm:w-auto bg-red-500 hover:bg-red-600">
+            Book Appointment
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <Link href="#how-it-works">See Demo</Link>
+          <Button size="lg" variant="outline" className="w-full sm:w-auto">
+            Find Emergency Care
           </Button>
         </motion.div>
+      </motion.div>
+      <motion.div 
+        className="relative hidden lg:block"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <Image 
+          src="https://picsum.photos/seed/doctor-hero/600/600" 
+          alt="Friendly doctor" 
+          width={600} 
+          height={600} 
+          className="relative rounded-full object-cover" 
+          data-ai-hint="friendly doctor"
+          priority
+        />
       </motion.div>
     </section>
   );
