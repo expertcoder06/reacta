@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sidebar';
 import { MainNav } from '@/components/main-nav';
 import { Header } from '@/components/header';
-import { SanjiwaniLogo } from '@/components/icons';
+import Image from 'next/image';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,7 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="border-b">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <SanjiwaniLogo className="w-6 h-6 text-primary" />
+            <Image src="/logo.png" alt="Sanjiwani Health Logo" width={24} height={24} />
             <span className="font-bold text-lg group-data-[collapsible=icon]:hidden">Sanjiwani</span>
           </Link>
         </SidebarHeader>

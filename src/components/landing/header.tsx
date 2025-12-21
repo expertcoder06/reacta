@@ -10,9 +10,9 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Button } from '@/components/ui/button';
-import { SanjiwaniLogo } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { motionVariants } from '@/lib/animations';
+import Image from 'next/image';
 
 export const Header = () => {
   return (
@@ -24,7 +24,7 @@ export const Header = () => {
     >
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <SanjiwaniLogo className="h-6 w-6 text-primary" />
+          <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
           <span className="font-bold sm:inline-block">Sanjiwani Health</span>
         </Link>
         <NavigationMenu className="hidden md:flex">
