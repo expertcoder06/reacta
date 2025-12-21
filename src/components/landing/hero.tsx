@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="container grid lg:grid-cols-2 items-center gap-12 pt-8 md:pt-16 pb-12 overflow-hidden">
+    <section className="container grid lg:grid-cols-2 items-center gap-8 md:gap-12 pt-8 md:pt-16 pb-12 overflow-hidden">
       <motion.div
         className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6"
         variants={motionVariants.staggerContainer}
@@ -16,7 +16,7 @@ export const Hero = () => {
         animate="show"
       >
         <motion.h1
-          className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
+          className="text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl font-headline"
           variants={motionVariants.slideInLeft}
         >
           Your <span className="text-red-500">Health,</span> <br />
@@ -51,19 +51,19 @@ export const Hero = () => {
         </motion.div>
       </motion.div>
       <motion.div 
-        className="relative hidden lg:block"
+        className="relative flex justify-center lg:justify-end"
         variants={motionVariants.slideInRight}
         initial="hidden"
         animate="show"
       >
-        <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob hidden lg:block"></div>
+        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 hidden lg:block"></div>
         <Image 
           src="/doctor.png" 
           alt="Friendly doctor" 
           width={600} 
           height={600} 
-          className="relative rounded-full object-cover" 
+          className="relative rounded-full object-cover w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px]" 
           priority
         />
       </motion.div>
