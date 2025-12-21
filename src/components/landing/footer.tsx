@@ -1,8 +1,16 @@
+
+'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   const footerSections = {
     "For patients": [
       { title: "Search for doctors", href: "#" },
@@ -60,7 +68,7 @@ export const Footer = () => {
             <span className="font-bold text-lg">Sanjiwani Health</span>
           </div>
           <p className="text-sm text-gray-400">
-            &copy; {currentYear} Sanjiwani Health. All rights reserved.
+            {currentYear && <>© {currentYear} Sanjiwani Health. All rights reserved.</>}
           </p>
         </div>
       </div>
