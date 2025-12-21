@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -37,7 +36,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-slate-900 text-white">
+    <footer id="footer" className="bg-slate-900 text-white">
       <div className="container py-12">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {Object.entries(footerSections).map(([title, links]) => (

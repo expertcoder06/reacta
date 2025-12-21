@@ -1,4 +1,3 @@
-
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -21,9 +20,9 @@ export const Header = () => {
     <header className="w-full">
       <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-white/80 backdrop-blur-sm px-6 shadow-md">
         {/* Left Section - Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="#footer" className="flex items-center gap-2">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-red-500/50 bg-white">
-            <HeartPulse className="h-6 w-6 text-red-500" />
+            <Image src="/logo.png" alt="Sanjiwani Health Logo" width={24} height={24} />
           </div>
           <span className="font-bold text-xl text-red-500 hidden sm:inline-block">
             Sanjiwani
