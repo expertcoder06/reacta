@@ -39,4 +39,16 @@ export const motionVariants: { [key: string]: Variants | ((delay?: number) => Va
     scale: 1.05,
     transition: { type: 'spring', stiffness: 400, damping: 10 },
   },
+  card3DHover: {
+    hover: {
+      y: -10,
+      rotateX: 5,
+      rotateY: -5,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 20,
+      },
+    },
+  },
 };

@@ -27,20 +27,31 @@ export const QuickAccess = () => {
         </p>
       </div>
       <motion.div
-        className="mx-auto grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-4"
+        className="mx-auto grid justify-center gap-8 sm:grid-cols-2 md:grid-cols-4"
+        style={{ perspective: '1000px' }}
         variants={motionVariants.staggerContainer}
         initial="hidden"
         animate={isInView ? 'show' : 'hidden'}
       >
         {quickAccessItems.map((item, i) => (
           <motion.div key={i} variants={motionVariants.slideUp(0)}>
-            <Link href={item.href}>
-              <motion.div whileHover="scale" variants={motionVariants.cardHover} className="h-full">
-                <Card className="h-full text-center p-6 flex flex-col items-center justify-center">
-                  <div className="mb-4 text-red-500">
+            <Link href={item.href} className="block h-full">
+              <motion.div
+                whileHover="hover"
+                variants={motionVariants.card3DHover}
+                className="h-full"
+              >
+                <Card className="h-full text-center p-6 flex flex-col items-center justify-center transition-shadow duration-300 shadow-lg hover:shadow-2xl hover:shadow-red-500/20 rounded-2xl">
+                  <motion.div
+                    variants={{
+                      hover: { scale: 1.1, y: -5 },
+                    }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="mb-4 text-red-500"
+                  >
                     <item.icon className="h-10 w-10" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-2 text-slate-800">{item.title}</h3>
                   <p className="text-muted-foreground text-sm">{item.desc}</p>
                 </Card>
               </motion.div>
