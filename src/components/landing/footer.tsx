@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { SanjiwaniLogo } from '@/components/icons';
+import Image from 'next/image';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,7 +57,7 @@ export const Footer = () => {
         </div>
         <div className="mt-12 border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2">
-            <SanjiwaniLogo className="h-8 w-8" />
+            <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
             <span className="font-bold text-lg">Sanjiwani Health</span>
           </div>
           <p className="text-sm text-gray-400 mt-4 md:mt-0">
