@@ -35,21 +35,21 @@ export const Header = () => {
                 <NavigationMenu>
                     <NavigationMenuList>
                         <NavigationMenuItem>
-                          <Link href="/">
+                          <Link href="/" legacyBehavior passHref>
                             <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-red-500 hover:bg-red-500/10 rounded-full font-medium")}>
                             Home
                             </NavigationMenuLink>
                           </Link>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                          <Link href="/dashboard">
+                          <Link href="/dashboard" legacyBehavior passHref>
                              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-red-500 hover:bg-red-500/10 rounded-full font-medium")}>
                             My Appointments
                             </NavigationMenuLink>
                           </Link>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                          <Link href="#features">
+                          <Link href="#features" legacyBehavior passHref>
                             <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-red-500 hover:bg-red-500/10 rounded-full font-medium")}>
                             Our Services
                             </NavigationMenuLink>
