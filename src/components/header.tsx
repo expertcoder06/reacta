@@ -14,10 +14,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Search, Bell } from 'lucide-react';
 import Link from 'next/link';
+import { Card } from '@/components/ui/card';
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b bg-card px-4 md:px-6">
+    <Card className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b bg-card px-4 md:px-6 rounded-none md:rounded-lg md:m-4 md:top-2">
       <div className="flex items-center gap-2">
         <SidebarTrigger className="md:hidden" />
       </div>
@@ -28,11 +29,11 @@ export function Header() {
             <Input
               type="search"
               placeholder="Search..."
-              className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] bg-secondary"
+              className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] bg-background"
             />
           </div>
         </form>
-        <Button variant="ghost" size="icon" className="rounded-full">
+        <Button variant="ghost" size="icon" className="rounded-full text-primary hover:bg-primary/10 hover:text-primary">
           <Bell className="h-5 w-5" />
           <span className="sr-only">Toggle notifications</span>
         </Button>
@@ -55,6 +56,6 @@ export function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </header>
+    </Card>
   );
 }
