@@ -1,0 +1,10 @@
+diff --git a/node_modules/tailwindcss-animate/index.js b/node_modules/tailwindcss-animate/index.js
+index 585c7c8..38d387f 100644
+--- a/node_modules/tailwindcss-animate/index.js
++++ b/node_modules/tailwindcss-animate/index.js
+@@ -1,4 +1,4 @@
+-const plugin = require("tailwindcss/plugin")
++const plugin = require("tailwindcss/plugin.js")
+ 
+ function filterDefault(values) {
+ 	return Object.fromEntries(
