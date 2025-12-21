@@ -55,12 +55,12 @@ export const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-12 border-t border-slate-800 pt-8 flex flex-col items-center gap-4">
           <div className="flex items-center space-x-2">
             <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
             <span className="font-bold text-lg">Sanjiwani Health</span>
           </div>
-          <p className="text-sm text-gray-400 mt-4 md:mt-0">
+          <p className="text-sm text-gray-400">
             &copy; {currentYear} Sanjiwani Health. All rights reserved.
           </p>
         </div>
