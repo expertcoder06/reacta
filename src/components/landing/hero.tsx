@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="container grid lg:grid-cols-2 items-center gap-12 pt-8 md:pt-16 pb-12">
+    <section className="container grid lg:grid-cols-2 items-center gap-12 pt-8 md:pt-16 pb-12 overflow-hidden">
       <motion.div
         className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6"
         variants={motionVariants.staggerContainer}
@@ -17,7 +17,7 @@ export const Hero = () => {
       >
         <motion.h1
           className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl font-headline"
-          variants={motionVariants.slideUp(0)}
+          variants={motionVariants.slideInLeft}
         >
           Your <span className="text-red-500">Health,</span> <br />
           Connected With Care.
@@ -52,9 +52,9 @@ export const Hero = () => {
       </motion.div>
       <motion.div 
         className="relative hidden lg:block"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        variants={motionVariants.slideInRight}
+        initial="hidden"
+        animate="show"
       >
         <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
