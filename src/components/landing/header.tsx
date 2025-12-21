@@ -20,12 +20,12 @@ export const Header = () => {
       initial="hidden"
       animate="show"
       variants={motionVariants.fadeIn}
-      className="sticky top-0 z-50 w-full border-b bg-transparent text-foreground backdrop-blur"
+      className="sticky top-0 z-50 w-full border-b bg-background/80 text-foreground backdrop-blur"
     >
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
-          <span className="font-bold sm:inline-block">Sanjiwani Health</span>
+          <span className="font-bold hidden sm:inline-block">Sanjiwani Health</span>
         </Link>
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
