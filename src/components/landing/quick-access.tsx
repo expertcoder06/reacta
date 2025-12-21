@@ -21,7 +21,7 @@ export const QuickAccess = () => {
   return (
     <section id="quick-access" ref={ref} className="container space-y-6 py-12 md:py-24">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">Quick Access to Healthcare</h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-red-500">Quick Access to Healthcare</h2>
         <p className="mt-2 max-w-xl text-muted-foreground">
           Everything you need for your health journey in one place.
         </p>
@@ -37,7 +37,7 @@ export const QuickAccess = () => {
             <Link href={item.href}>
               <motion.div whileHover="scale" variants={motionVariants.cardHover} className="h-full">
                 <Card className="h-full text-center p-6 flex flex-col items-center justify-center">
-                  <div className="mb-4 text-primary">
+                  <div className="mb-4 text-red-500">
                     <item.icon className="h-10 w-10" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>

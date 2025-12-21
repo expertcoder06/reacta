@@ -36,7 +36,7 @@ export const MsmeSection = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-10 mx-auto w-fit bg-primary/10 text-primary px-6 py-3 rounded-2xl text-lg font-semibold shadow-sm border border-primary/20 flex items-center gap-2"
+                    className="mt-10 mx-auto w-fit bg-red-500/10 text-red-500 px-6 py-3 rounded-2xl text-lg font-semibold shadow-sm border border-red-500/20 flex items-center gap-2"
                 >
                     <ShieldCheck className="h-6 w-6" />
                     <span>MSME Registered (UDYAM-XX-XX-XXXX8337)</span>

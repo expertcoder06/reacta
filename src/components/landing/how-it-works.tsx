@@ -27,7 +27,7 @@ export const HowItWorks = () => {
             >
                 {steps.map((step) => (
                     <motion.div key={step.num} variants={motionVariants.slideUp(0)} className="flex items-start space-x-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-xl">{step.num}</div>
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white font-bold text-xl">{step.num}</div>
                         <div>
                             <h3 className="text-xl font-semibold">{step.title}</h3>
                             <p className="mt-1 text-muted-foreground">{step.desc}</p>

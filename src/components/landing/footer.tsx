@@ -37,7 +37,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-blue-900 text-white">
+    <footer className="bg-slate-900 text-white">
       <div className="container py-12">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {Object.entries(footerSections).map(([title, links]) => (
@@ -46,7 +46,7 @@ export const Footer = () => {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.title}>
-                    <Link href={link.href} className="text-sm text-gray-300 hover:text-white">
+                    <Link href={link.href} className="text-sm text-gray-300 hover:text-red-400">
                       {link.title}
                     </Link>
                   </li>
@@ -55,7 +55,7 @@ export const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2">
             <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
             <span className="font-bold text-lg">Sanjiwani Health</span>
