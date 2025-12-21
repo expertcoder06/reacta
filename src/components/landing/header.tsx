@@ -24,8 +24,9 @@ export const Header = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (isSearchOpen) {
-      searchInputRef.current?.focus();
+    if (isSearchOpen && searchInputRef.current) {
+      // A small delay to allow the animation to complete before focusing
+      setTimeout(() => searchInputRef.current?.focus(), 100);
     }
   }, [isSearchOpen]);
   
@@ -49,6 +50,8 @@ export const Header = () => {
     { href: '/dashboard', name: 'My Appointments' },
     { href: '#features', name: 'Our Services' },
   ];
+
+  const searchTransition = { duration: 0.4, ease: 'easeInOut' };
 
   return (
     <header className="w-full">
@@ -77,15 +80,17 @@ export const Header = () => {
                     initial={{ opacity: 0, width: '0%' }}
                     animate={{ opacity: 1, width: '100%' }}
                     exit={{ opacity: 0, width: '0%' }}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    transition={searchTransition}
                     className="relative flex w-full items-center"
                   >
                     <Search className="absolute left-3 h-5 w-5 text-red-500" />
                     <Input
                       ref={searchInputRef}
                       placeholder="Search doctors, hospitals, services…"
-                      className="w-full rounded-full border-none bg-transparent pl-10 pr-10 text-red-500 placeholder:text-red-500/70 focus:ring-0"
-                      onKeyDown={(e) => e.key === 'Escape' && setIsSearchOpen(false)}
+                      className="w-full rounded-full border-none bg-transparent pl-10 pr-10 text-red-500 placeholder:text-red-500/70 focus:ring-2 focus:ring-red-300 focus:ring-offset-0"
+                      onKeyDown={(e) => {
+                          if (e.key === 'Escape') setIsSearchOpen(false)
+                      }}
                     />
                     <Button onClick={() => setIsSearchOpen(false)} variant="ghost" size="icon" className="absolute right-1 rounded-full text-red-500 hover:bg-red-500/10 hover:text-red-500">
                       <X className="h-5 w-5" />
@@ -135,7 +140,7 @@ export const Header = () => {
           <Button variant="outline" className="rounded-full border-red-500 text-red-500 hover:bg-red-500/10 hover:text-red-500" asChild>
             <Link href="/dashboard">Sign In</Link>
           </Button>
-          <Button className="rounded-full bg-red-500 hover:bg-red-600" asChild>
+          <Button className="rounded-full bg-red-500 hover:bg-red-600 shadow-[0_10px_30px_rgba(255,77,77,0.15)]" asChild>
             <Link href="/dashboard">Sign Up</Link>
           </Button>
         </div>
@@ -148,7 +153,7 @@ export const Header = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="md:hidden mt-2 p-4"
              >
                 <div className="relative flex w-full items-center rounded-full bg-white shadow-md p-1 border border-red-500/30">
@@ -156,8 +161,10 @@ export const Header = () => {
                     <Input
                         ref={searchInputRef}
                         placeholder="Search..."
-                        className="w-full rounded-full border-none bg-transparent pl-11 pr-10 h-12 text-base"
-                        onKeyDown={(e) => e.key === 'Escape' && setIsSearchOpen(false)}
+                        className="w-full rounded-full border-none bg-transparent pl-11 pr-10 h-12 text-base focus:ring-2 focus:ring-red-300 focus:ring-offset-0"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Escape') setIsSearchOpen(false)
+                        }}
                     />
                     <Button onClick={() => setIsSearchOpen(false)} variant="ghost" size="icon" className="absolute right-2 rounded-full text-red-500 hover:bg-red-500/10">
                         <X className="h-6 w-6" />
@@ -167,10 +174,10 @@ export const Header = () => {
         )}
         {isMobile && isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: -20, x: -10 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: -20, x: -10 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="md:hidden mt-2 p-4 bg-white rounded-lg shadow-lg"
           >
             <nav className="flex flex-col gap-4">
@@ -183,7 +190,7 @@ export const Header = () => {
                 <Button variant="outline" className="w-full rounded-full border-red-500 text-red-500" asChild>
                   <Link href="/dashboard">Sign In</Link>
                 </Button>
-                <Button className="w-full rounded-full bg-red-500 hover:bg-red-600" asChild>
+                <Button className="w-full rounded-full bg-red-500 hover:bg-red-600 shadow-[0_10px_30px_rgba(255,77,77,0.15)]" asChild>
                   <Link href="/dashboard">Sign Up</Link>
                 </Button>
               </div>
