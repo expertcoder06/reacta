@@ -1,7 +1,9 @@
 
 'use client';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { HeartPulse, Search } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,65 +11,66 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { motionVariants } from '@/lib/animations';
-import Image from 'next/image';
 
 export const Header = () => {
   return (
-    <motion.header
-      initial="hidden"
-      animate="show"
-      variants={motionVariants.fadeIn}
-      className="sticky top-0 z-50 w-full border-b bg-background/80 text-foreground backdrop-blur"
-    >
-      <div className="container flex h-16 items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Image src="/logo.png" alt="Sanjiwani Health Logo" width={32} height={32} />
-          <span className="font-bold hidden sm:inline-block">Sanjiwani Health</span>
+    <header className="w-full">
+      <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-white/80 backdrop-blur-sm px-6 shadow-md">
+        {/* Left Section - Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/50 bg-white">
+            <HeartPulse className="h-6 w-6 text-primary" />
+          </div>
+          <span className="font-bold text-xl text-primary hidden sm:inline-block">
+            Sanjiwani
+          </span>
         </Link>
-        <NavigationMenu className="hidden md:flex">
-          <NavigationMenuList>
-             <NavigationMenuItem>
-              <Link href="#features" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                  Features
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="#testimonials" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                  Testimonials
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-               <Link href="/blogs" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                  Blogs
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/for-doctors" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                  For Doctors
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <Button variant="ghost" asChild>
-            <Link href="/dashboard">Login</Link>
+
+        {/* Center Section - Navigation */}
+        <div className="hidden md:flex flex-1 justify-center">
+            <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-white/50 p-1">
+                <NavigationMenu>
+                    <NavigationMenuList>
+                        <NavigationMenuItem>
+                        <Link href="/" legacyBehavior passHref>
+                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-primary hover:bg-primary/10 rounded-full font-medium")}>
+                            Home
+                            </NavigationMenuLink>
+                        </Link>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
+                        <Link href="/dashboard" legacyBehavior passHref>
+                             <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-primary hover:bg-primary/10 rounded-full font-medium")}>
+                            My Appointments
+                            </NavigationMenuLink>
+                        </Link>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
+                        <Link href="#features" legacyBehavior passHref>
+                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-primary hover:bg-primary/10 rounded-full font-medium")}>
+                            Our Services
+                            </NavigationMenuLink>
+                        </Link>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+                <Button variant="ghost" size="icon" className="rounded-full text-primary hover:bg-primary/10 hover:text-primary">
+                    <Search className="h-5 w-5" />
+                </Button>
+            </div>
+        </div>
+
+        {/* Right Section - Auth Buttons */}
+        <div className="flex items-center gap-2">
+          <Button variant="outline" className="rounded-full border-primary text-primary hover:bg-primary/10 hover:text-primary" asChild>
+            <Link href="/dashboard">Sign In</Link>
           </Button>
-          <Button asChild>
-            <Link href="/dashboard">Get Started</Link>
+          <Button className="rounded-full bg-primary hover:bg-primary/90" asChild>
+            <Link href="/dashboard">Sign Up</Link>
           </Button>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 };

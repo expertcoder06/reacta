@@ -14,7 +14,9 @@ import { Header } from '@/components/landing/header';
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-foreground">
-        <Header />
+        <div className="bg-gradient-to-r from-teal-50 to-green-50 p-4">
+          <Header />
+        </div>
         <main className="flex-1">
             <Hero />
             <div className="bg-white py-12">
