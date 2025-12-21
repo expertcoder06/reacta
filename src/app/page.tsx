@@ -1,4 +1,5 @@
 
+
 import { Hero } from '@/components/landing/hero';
 import { TrustBadges } from '@/components/landing/trust-badges';
 import { QuickAccess } from '@/components/landing/quick-access';
@@ -14,7 +15,7 @@ import { Header } from '@/components/landing/header';
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 text-foreground">
-        <div className="bg-gradient-to-r from-teal-50 to-green-50 p-4">
+        <div className="bg-slate-50 p-4">
           <Header />
         </div>
         <main className="flex-1">
