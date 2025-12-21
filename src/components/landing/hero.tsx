@@ -59,12 +59,11 @@ export const Hero = () => {
         <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <Image 
-          src="https://picsum.photos/seed/doctor-hero/600/600" 
+          src="/doctor.png" 
           alt="Friendly doctor" 
           width={600} 
           height={600} 
           className="relative rounded-full object-cover" 
-          data-ai-hint="friendly doctor"
           priority
         />
       </motion.div>
