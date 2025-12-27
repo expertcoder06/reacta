@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from 'react';
+
+'use client';
+
+import React from 'react';
 
 export default function SanjiwaniLoader() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          return 0; // Loop the animation
-        }
-        return prev + 1;
-      });
-    }, 30);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="relative flex flex-col items-center">
@@ -25,7 +13,7 @@ export default function SanjiwaniLoader() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-32 bg-white rounded-2xl shadow-lg border-4 border-gray-800 flex items-center justify-center overflow-hidden">
             {/* Medical Cross with Hands */}
             <div className="relative">
-              <svg width="60" height="60" viewBox="0 0 60 60" className="animate-pulse">
+              <svg width="60" height="60" viewBox="0 0 60 60" className="animate-pulse-slow">
                 {/* Red Cross */}
                 <rect x="22" y="10" width="16" height="40" fill="#FF5A5F" rx="2"/>
                 <rect x="10" y="22" width="40" height="16" fill="#FF5A5F" rx="2"/>
@@ -52,25 +40,14 @@ export default function SanjiwaniLoader() {
                style={{ left: '80%', top: '50%', transformOrigin: 'left center', transform: 'translate(-50%, -50%) rotate(30deg)' }}></div>
 
           {/* Orbiting Dots */}
-          {[0, 1, 2, 3, 4].map((index) => {
-            const angle = (progress * 3.6 + index * 72) * (Math.PI / 180);
-            const x = Math.cos(angle) * 90 + 96;
-            const y = Math.sin(angle) * 90 + 96;
-            const size = index % 2 === 0 ? 'w-5 h-5' : 'w-4 h-4';
-            const color = index % 2 === 0 ? 'bg-red-500' : 'bg-gray-800';
-            
-            return (
+          <div className="orbit-container">
+            {[0, 1, 2, 3, 4].map((index) => (
               <div
                 key={index}
-                className={`absolute ${size} ${color} rounded-full transition-all duration-100 shadow-lg`}
-                style={{
-                  left: `${x}px`,
-                  top: `${y}px`,
-                  transform: 'translate(-50%, -50%)',
-                }}
+                className={`orbiting-dot dot-${index}`}
               />
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         {/* Logo Text */}
@@ -85,19 +62,24 @@ export default function SanjiwaniLoader() {
 
         {/* Progress Bar */}
         <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden shadow-inner">
-          <div 
-            className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full transition-all duration-300 ease-out"
-            style={{ width: `${progress}%` }}
-          />
+          <div className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full animate-progress" />
         </div>
 
         {/* Loading Text */}
-        <p className="mt-4 text-gray-600 text-sm font-medium animate-pulse">
+        <p className="mt-4 text-gray-600 text-sm font-medium animate-pulse-fast">
           Loading your health companion...
         </p>
       </div>
 
       <style jsx>{`
+        .animate-pulse-slow {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-pulse-fast {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
         @keyframes pulse {
           0%, 100% {
             opacity: 1;
@@ -108,9 +90,72 @@ export default function SanjiwaniLoader() {
             transform: scale(1.05);
           }
         }
-        
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+        .animate-progress {
+          animation: progress-bar 3s ease-out infinite;
+        }
+
+        @keyframes progress-bar {
+          0% {
+            width: 0%;
+          }
+          100% {
+            width: 100%;
+          }
+        }
+
+        .orbit-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .orbiting-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+            transform-origin: 0 0;
+        }
+
+        .dot-0 {
+            width: 20px;
+            height: 20px;
+            background-color: #ef4444; /* red-500 */
+            transform: translate(0, -90px);
+        }
+        .dot-1 {
+            width: 16px;
+            height: 16px;
+            background-color: #1f2937; /* gray-800 */
+            transform: rotate(72deg) translateY(-90px);
+        }
+        .dot-2 {
+            width: 20px;
+            height: 20px;
+            background-color: #ef4444; /* red-500 */
+            transform: rotate(144deg) translateY(-90px);
+        }
+        .dot-3 {
+            width: 16px;
+            height: 16px;
+            background-color: #1f2937; /* gray-800 */
+            transform: rotate(216deg) translateY(-90px);
+        }
+        .dot-4 {
+            width: 20px;
+            height: 20px;
+            background-color: #ef4444; /* red-500 */
+            transform: rotate(288deg) translateY(-90px);
         }
       `}</style>
     </div>
