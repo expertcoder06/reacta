@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -20,6 +21,7 @@ export default {
         body: ['"PT Sans"', 'sans-serif'],
         headline: ['"PT Sans"', 'sans-serif'],
         code: ['monospace'],
+        devanagari: ['"Noto Sans Devanagari"', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

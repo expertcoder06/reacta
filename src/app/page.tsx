@@ -7,7 +7,7 @@ import { MsmeSection } from '@/components/landing/msme-section';
 import { InnovationAwardSection } from '@/components/landing/innovation-award-section';
 import { Features } from '@/components/landing/features';
 import { HowItWorks } from '@/components/landing/how-it-works';
-import { Testimonials } from '@/components/landing/testimonials';
+import { QuoteSection } from '@/components/landing/quote-section';
 import { NewsletterSignUp } from '@/components/landing/newsletter-signup';
 import { Footer } from '@/components/landing/footer';
 import { Header } from '@/components/landing/header';
@@ -39,7 +39,7 @@ export default function LandingPage() {
               <InnovationAwardSection />
               <Features />
               <HowItWorks />
-              <Testimonials />
+              <QuoteSection />
               <NewsletterSignUp />
           </main>
           <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
