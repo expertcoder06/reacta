@@ -140,7 +140,7 @@ export const Header = () => {
           <Button variant="outline" className="rounded-full border-primary text-primary hover:bg-primary/10 hover:text-primary" asChild>
             <Link href="/dashboard">Sign In</Link>
           </Button>
-          <Button variant="destructive" className="rounded-full hover:bg-destructive/90 shadow-[0_10px_30px_rgba(255,77,77,0.15)]" asChild>
+          <Button variant="destructive" className="rounded-full hover:bg-destructive/90 shadow-[0_10px_30px_hsl(var(--destructive)/0.15)]" asChild>
             <Link href="/dashboard">Sign Up</Link>
           </Button>
         </div>
@@ -190,7 +190,7 @@ export const Header = () => {
                 <Button variant="outline" className="w-full rounded-full border-primary text-primary" asChild>
                   <Link href="/dashboard">Sign In</Link>
                 </Button>
-                <Button variant="destructive" className="w-full rounded-full hover:bg-destructive/90 shadow-[0_10px_30px_rgba(255,77,77,0.15)]" asChild>
+                <Button variant="destructive" className="w-full rounded-full hover:bg-destructive/90 shadow-[0_10px_30px_hsl(var(--destructive)/0.15)]" asChild>
                   <Link href="/dashboard">Sign Up</Link>
                 </Button>
               </div>
