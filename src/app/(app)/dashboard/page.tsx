@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Card,
@@ -12,7 +15,27 @@ import { Badge } from '@/components/ui/badge';
 import { appointments, doctors, healthRecords } from '@/lib/data';
 import { Stethoscope, FlaskConical, Hospital, ArrowRight, Video, User, FileText } from 'lucide-react';
 
+type FormattedAppointment = {
+  id: string;
+  doctor: string;
+  specialty: string;
+  date: string;
+  time: string;
+  type: 'Virtual' | 'In-Person';
+};
+
 export default function DashboardPage() {
+  const [formattedAppointments, setFormattedAppointments] = useState<FormattedAppointment[]>([]);
+
+  useEffect(() => {
+    setFormattedAppointments(
+      appointments.map(appt => ({
+        ...appt,
+        date: new Date(appt.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),
+      }))
+    );
+  }, []);
+  
   return (
     <div className="flex flex-col gap-8">
       <div>
@@ -75,7 +98,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {appointments.map((appt) => (
+              {formattedAppointments.map((appt) => (
                 <div key={appt.id} className="flex items-center justify-between p-3 rounded-lg bg-secondary">
                   <div className="flex items-center gap-4">
                     <Avatar className="h-10 w-10">
@@ -88,7 +111,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">{new Date(appt.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}, {appt.time}</p>
+                    <p className="text-sm font-medium">{appt.date}, {appt.time}</p>
                     <Badge variant={appt.type === 'Virtual' ? 'default' : 'outline'} className="mt-1">{appt.type}</Badge>
                   </div>
                 </div>

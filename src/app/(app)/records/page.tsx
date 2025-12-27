@@ -1,9 +1,9 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,7 +20,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { healthRecords } from '@/lib/data';
+import { healthRecords, type HealthRecord } from '@/lib/data';
 import { Upload, FileText, Download, MoreVertical } from 'lucide-react';
 import {
   DropdownMenu,
@@ -29,9 +29,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+type FormattedHealthRecord = Omit<HealthRecord, 'date'> & {
+  date: string;
+};
+
 export default function RecordsPage() {
-  const prescriptions = healthRecords.filter(r => r.type === 'Prescription');
-  const testReports = healthRecords.filter(r => r.type === 'Test Report');
+  const [formattedRecords, setFormattedRecords] = useState<FormattedHealthRecord[]>([]);
+
+  useEffect(() => {
+    setFormattedRecords(
+      healthRecords.map(record => ({
+        ...record,
+        date: new Date(record.date).toLocaleDateString(),
+      }))
+    );
+  }, []);
+
+  const prescriptions = formattedRecords.filter(r => r.type === 'Prescription');
+  const testReports = formattedRecords.filter(r => r.type === 'Test Report');
 
   return (
     <div className="space-y-8">
@@ -61,7 +76,7 @@ export default function RecordsPage() {
   );
 }
 
-function RecordTable({ records }: { records: typeof healthRecords }) {
+function RecordTable({ records }: { records: FormattedHealthRecord[] }) {
   return (
     <Card>
       <CardContent className="pt-6">
@@ -80,7 +95,7 @@ function RecordTable({ records }: { records: typeof healthRecords }) {
                   <FileText className="h-4 w-4 text-muted-foreground" />
                   {record.name}
                 </TableCell>
-                <TableCell>{new Date(record.date).toLocaleDateString()}</TableCell>
+                <TableCell>{record.date}</TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
