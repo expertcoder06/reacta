@@ -9,6 +9,7 @@ import {
 import { MainNav } from '@/components/main-nav';
 import { Header } from '@/components/header';
 import Image from 'next/image';
+import { Toaster } from "@/components/ui/toaster";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,6 +37,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </main>
+        <Toaster />
       </SidebarInset>
     </SidebarProvider>
   );
