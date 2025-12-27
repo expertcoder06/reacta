@@ -24,7 +24,7 @@ export const TrustBadges = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center items-center">
             {stats.map(stat => (
                 <div key={stat.label} className="bg-white p-4 rounded-lg shadow-md">
-                    <p className="text-2xl font-bold text-red-500">{stat.value}</p>
+                    <p className="text-2xl font-bold text-primary">{stat.value}</p>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
             ))}
@@ -34,7 +34,7 @@ export const TrustBadges = () => {
             </div>
             {diagnosticStats.map(stat => (
                 <div key={stat.label} className="bg-white p-4 rounded-lg shadow-md">
-                    <p className="text-2xl font-bold text-red-500">{stat.value}</p>
+                    <p className="text-2xl font-bold text-primary">{stat.value}</p>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
             ))}

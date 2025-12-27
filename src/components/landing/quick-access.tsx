@@ -21,7 +21,7 @@ export const QuickAccess = () => {
   return (
     <section id="quick-access" ref={ref} className="container space-y-6 py-12 md:py-24">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-red-500">Quick Access to Healthcare</h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">Quick Access to Healthcare</h2>
         <p className="mt-2 max-w-xl text-muted-foreground">
           Everything you need for your health journey in one place.
         </p>
@@ -41,13 +41,13 @@ export const QuickAccess = () => {
                 variants={motionVariants.card3DHover}
                 className="h-full"
               >
-                <Card className="h-full text-center p-6 flex flex-col items-center justify-center transition-shadow duration-300 shadow-lg hover:shadow-2xl hover:shadow-red-500/20 rounded-2xl">
+                <Card className="h-full text-center p-6 flex flex-col items-center justify-center transition-shadow duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/20 rounded-2xl">
                   <motion.div
                     variants={{
                       hover: { scale: 1.1, y: -5 },
                     }}
                     transition={{ type: 'spring', stiffness: 300 }}
-                    className="mb-4 text-red-500"
+                    className="mb-4 text-primary"
                   >
                     <item.icon className="h-10 w-10" />
                   </motion.div>

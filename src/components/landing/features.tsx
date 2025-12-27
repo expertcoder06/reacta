@@ -35,7 +35,7 @@ export const Features = () => {
             <motion.div whileHover="scale" variants={motionVariants.cardHover}>
               <Card className="h-full">
                 <CardHeader>
-                  <div className="bg-red-500/10 text-red-500 p-3 rounded-full w-fit mb-4">
+                  <div className="bg-primary/10 text-primary p-3 rounded-full w-fit mb-4">
                     <feature.icon className="h-6 w-6" />
                   </div>
                   <CardTitle>{feature.title}</CardTitle>

@@ -47,7 +47,7 @@ export const Testimonials = () => {
                                     <div>
                                         <p className="font-semibold">{testimonial.name}</p>
                                         <div className="flex items-center gap-0.5">
-                                            {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-red-500 text-red-500" />)}
+                                            {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-primary text-primary" />)}
                                         </div>
                                     </div>
                                 </CardHeader>

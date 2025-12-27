@@ -19,7 +19,7 @@ export const Hero = () => {
           className="text-4xl font-bold leading-tight tracking-tighter sm:text-5xl md:text-6xl font-headline"
           variants={motionVariants.slideInLeft}
         >
-          Your <span className="text-red-500">Health,</span> <br />
+          Your <span className="text-primary">Health,</span> <br />
           Connected With Care.
         </motion.h1>
         
@@ -42,7 +42,7 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           variants={motionVariants.slideUp(0.4)}
         >
-          <Button size="lg" className="w-full sm:w-auto bg-red-500 hover:bg-red-600">
+          <Button size="lg" variant="destructive" className="w-full sm:w-auto hover:bg-destructive/90">
             Book Appointment
           </Button>
           <Button size="lg" variant="outline" className="w-full sm:w-auto">
