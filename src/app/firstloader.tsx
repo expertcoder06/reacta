@@ -15,8 +15,8 @@ export default function SanjiwaniLoader() {
             <div className="relative">
               <svg width="60" height="60" viewBox="0 0 60 60" className="animate-pulse-slow">
                 {/* Red Cross */}
-                <rect x="22" y="10" width="16" height="40" fill="#FF5A5F" rx="2"/>
-                <rect x="10" y="22" width="40" height="16" fill="#FF5A5F" rx="2"/>
+                <rect x="22" y="10" width="16" height="40" fill="hsl(var(--destructive))" rx="2"/>
+                <rect x="10" y="22" width="40" height="16" fill="hsl(var(--destructive))" rx="2"/>
                 
                 {/* White Hand */}
                 <path d="M 25 25 L 28 22 L 30 24 L 32 22 L 34 24 L 35 28 L 32 32 L 25 30 Z" 
@@ -24,7 +24,7 @@ export default function SanjiwaniLoader() {
                 
                 {/* Blue Hand */}
                 <path d="M 35 35 L 32 38 L 30 36 L 28 38 L 26 36 L 25 32 L 28 28 L 35 30 Z" 
-                      fill="#5DD3E8" opacity="0.9"/>
+                      fill="hsl(var(--primary))" opacity="0.9"/>
               </svg>
             </div>
             
@@ -55,14 +55,14 @@ export default function SanjiwaniLoader() {
           <h1 className="text-4xl font-bold text-gray-900 tracking-wide mb-1">
             SANJIWANI
           </h1>
-          <h2 className="text-3xl font-light tracking-widest" style={{ color: '#5DD3E8' }}>
+          <h2 className="text-3xl font-light tracking-widest" style={{ color: 'hsl(var(--primary))' }}>
             HEALTH
           </h2>
         </div>
 
         {/* Progress Bar */}
         <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden shadow-inner">
-          <div className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full animate-progress" />
+          <div className="h-full bg-gradient-to-r from-destructive to-red-400 rounded-full animate-progress" />
         </div>
 
         {/* Loading Text */}
@@ -130,31 +130,31 @@ export default function SanjiwaniLoader() {
         .dot-0 {
             width: 20px;
             height: 20px;
-            background-color: #ef4444; /* red-500 */
+            background-color: hsl(var(--destructive));
             transform: translate(0, -90px);
         }
         .dot-1 {
             width: 16px;
             height: 16px;
-            background-color: #1f2937; /* gray-800 */
+            background-color: hsl(var(--foreground));
             transform: rotate(72deg) translateY(-90px);
         }
         .dot-2 {
             width: 20px;
             height: 20px;
-            background-color: #ef4444; /* red-500 */
+            background-color: hsl(var(--destructive));
             transform: rotate(144deg) translateY(-90px);
         }
         .dot-3 {
             width: 16px;
             height: 16px;
-            background-color: #1f2937; /* gray-800 */
+            background-color: hsl(var(--foreground));
             transform: rotate(216deg) translateY(-90px);
         }
         .dot-4 {
             width: 20px;
             height: 20px;
-            background-color: #ef4444; /* red-500 */
+            background-color: hsl(var(--destructive));
             transform: rotate(288deg) translateY(-90px);
         }
       `}</style>
