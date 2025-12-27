@@ -7,13 +7,13 @@
     scroll-behavior: smooth;
   }
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    --background: 220 20% 98%;
+    --foreground: 220 15% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card-foreground: 220 15% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
-    --primary: 173 80% 40%; /* Teal */
+    --popover-foreground: 220 15% 10%;
+    --primary: 25 95% 53%; /* Orange */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -25,7 +25,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 173 80% 40%;
+    --ring: 25 95% 53%;
     --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -42,13 +42,13 @@
     --sidebar-ring: 217 90% 60%;
   }
   .dark {
-    --background: 224 71% 4%;
+    --background: 224 71% 4%; /* Dark Navy Blue */
     --foreground: 210 40% 98%;
-    --card: 224 71% 6%;
+    --card: 224 71% 8%;
     --card-foreground: 210 40% 98%;
     --popover: 224 71% 6%;
     --popover-foreground: 210 40% 98%;
-    --primary: 173 80% 40%;
+    --primary: 25 95% 53%; /* Orange */
     --primary-foreground: 210 40% 98%;
     --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
@@ -60,7 +60,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 173 80% 40%;
+    --ring: 25 95% 53%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -83,7 +83,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to bottom, hsl(0 0% 100%), hsl(173 50% 98%));
   }
   .dark body {
     background-image: none;

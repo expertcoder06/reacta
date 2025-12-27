@@ -43,7 +43,7 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           variants={motionVariants.slideUp(0.4)}
         >
-          <Button size="lg" variant="destructive" className="w-full sm:w-auto hover:bg-destructive/90">
+          <Button size="lg" variant="default" className="w-full sm:w-auto shadow-[0_10px_30px_hsl(var(--primary)/0.15)]">
             Book Appointment
           </Button>
           <Button size="lg" variant="outline" className="w-full sm:w-auto">
@@ -57,8 +57,8 @@ export const Hero = () => {
         initial="hidden"
         animate="show"
       >
-        <div className="absolute -top-10 -left-10 w-48 h-48 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob hidden lg:block"></div>
-        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 hidden lg:block"></div>
+        <div className="absolute -top-10 -left-10 w-48 h-48 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob hidden lg:block"></div>
+        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-destructive/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 hidden lg:block"></div>
         <Image 
           src="/doctor.png" 
           alt="Friendly doctor" 

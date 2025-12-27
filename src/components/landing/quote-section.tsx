@@ -3,12 +3,12 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export const QuoteSection = () => {
   return (
-    <section id="quote" className="py-12 md:py-24 bg-teal-50/50">
+    <section id="quote" className="py-12 md:py-24 bg-secondary/20">
       <div className="container">
-        <Card className="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm shadow-xl rounded-2xl overflow-hidden">
+        <Card className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm shadow-xl rounded-2xl overflow-hidden">
           <CardContent className="p-8 md:p-12 text-center">
             <p 
-              className="font-devanagari text-2xl md:text-3xl lg:text-4xl leading-relaxed md:leading-loose text-teal-800"
+              className="font-devanagari text-2xl md:text-3xl lg:text-4xl leading-relaxed md:leading-loose text-foreground/80"
               lang="sa"
             >
               धर्मार्थकाममोक्षाणां स्वास्थ्यं मूलमुत्तमम्।<br/>

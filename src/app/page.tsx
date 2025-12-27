@@ -30,7 +30,7 @@ export default function LandingPage() {
           </div>
           <main className="flex-1">
               <Hero />
-              <div className="bg-white py-12">
+              <div className="py-12">
                   <TrustBadges />
               </div>
               <div className="my-12" />

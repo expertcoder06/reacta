@@ -26,7 +26,7 @@ export const Header = () => {
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
       // A small delay to allow the animation to complete before focusing
-      setTimeout(() => searchInputdRef.current?.focus(), 100);
+      setTimeout(() => searchInputRef.current?.focus(), 100);
     }
   }, [isSearchOpen]);
   
@@ -55,10 +55,10 @@ export const Header = () => {
 
   return (
     <header className="w-full">
-      <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-white/80 backdrop-blur-sm px-6 shadow-md">
+      <div className="container mx-auto flex h-20 items-center justify-between rounded-full bg-card/80 backdrop-blur-sm px-6 shadow-md">
         {/* Left Section - Logo */}
         <Link href="#footer" className="flex items-center gap-2">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/50 bg-white">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/50 bg-card">
             <Image src="/logo.png" alt="Sanjiwani Health Logo" width={24} height={24} />
           </div>
           <span className="font-bold text-xl text-primary hidden sm:inline-block">
@@ -70,7 +70,7 @@ export const Header = () => {
         <div className="flex flex-1 justify-end md:justify-center items-center gap-2">
             {/* --- Desktop/Tablet Navigation Pill --- */}
             <div className={cn(
-              "hidden md:flex items-center gap-2 rounded-full border border-primary/30 bg-white/50 p-1 transition-all duration-300 ease-in-out",
+              "hidden md:flex items-center gap-2 rounded-full border border-primary/30 bg-card/50 p-1 transition-all duration-300 ease-in-out",
               isSearchOpen ? 'w-full max-w-md' : 'w-auto'
             )}>
               <AnimatePresence initial={false}>
@@ -109,7 +109,7 @@ export const Header = () => {
                         <NavigationMenuList>
                           {navLinks.map(link => (
                             <NavigationMenuItem key={link.name}>
-                              <NavigationMenuLink href={link.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent text-primary hover:bg-primary/10 rounded-full font-medium")}>
+                              <NavigationMenuLink href={link.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent text-foreground hover:bg-primary/10 rounded-full font-medium")}>
                                 {link.name}
                               </NavigationMenuLink>
                             </NavigationMenuItem>
@@ -156,7 +156,7 @@ export const Header = () => {
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="md:hidden mt-2 p-4"
              >
-                <div className="relative flex w-full items-center rounded-full bg-white shadow-md p-1 border border-primary/30">
+                <div className="relative flex w-full items-center rounded-full bg-card shadow-md p-1 border border-primary/30">
                     <Search className="absolute left-4 h-5 w-5 text-primary" />
                     <Input
                         ref={searchInputRef}
@@ -178,15 +178,15 @@ export const Header = () => {
             animate={{ opacity: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, y: -20, x: -10 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden mt-2 p-4 bg-white rounded-lg shadow-lg"
+            className="md:hidden mt-2 p-4 bg-card rounded-lg shadow-lg"
           >
             <nav className="flex flex-col gap-4">
               {navLinks.map(link => (
-                  <Link key={link.href} href={link.href} className="text-primary font-medium py-2" onClick={() => setIsMenuOpen(false)}>
+                  <Link key={link.href} href={link.href} className="text-foreground font-medium py-2" onClick={() => setIsMenuOpen(false)}>
                       {link.name}
                   </Link>
               ))}
-              <div className="border-t border-gray-200 pt-4 flex flex-col gap-3">
+              <div className="border-t border-border pt-4 flex flex-col gap-3">
                 <Button variant="outline" className="w-full rounded-full border-primary text-primary" asChild>
                   <Link href="/dashboard">Sign In</Link>
                 </Button>
