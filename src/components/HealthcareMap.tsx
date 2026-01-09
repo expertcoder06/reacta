@@ -8,7 +8,6 @@ import {
   AdvancedMarker,
   InfoWindow,
   useMap,
-  useMapControl,
   ControlPosition,
 } from '@vis.gl/react-google-maps';
 import { allFacilities, type HealthcareFacility } from '@/lib/data';
@@ -104,14 +103,8 @@ const CustomMarker = ({
 };
 
 const RecenterControl = ({onClick}: {onClick: () => void}) => {
-    const controlDiv = useRef<HTMLDivElement>(null);
-    useMapControl({
-      position: ControlPosition.RIGHT_BOTTOM,
-      node: controlDiv.current
-    });
-    
     return (
-        <div ref={controlDiv} className="p-4">
+        <div className="absolute bottom-4 right-4 z-10">
             <Button variant="outline" size="icon" onClick={onClick} className="bg-card shadow-md">
                 <LocateFixed className='w-5 h-5' />
             </Button>
@@ -164,7 +157,7 @@ export default function HealthcareMap() {
 
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative">
       <Map
         defaultCenter={userLocation || { lat: 28.6139, lng: 77.209 }}
         defaultZoom={14}
@@ -196,9 +189,8 @@ export default function HealthcareMap() {
             </div>
           </InfoWindow>
         )}
-        
-        <RecenterControl onClick={handleRecenter} />
       </Map>
+      <RecenterControl onClick={handleRecenter} />
     </div>
   );
 }
