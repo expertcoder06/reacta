@@ -39,13 +39,54 @@ export type Hospital = {
   facilities: string[];
   image: string;
   dataAiHint: string;
+  lat: number;
+  lng: number;
+  type: 'hospital';
 };
 
 export const hospitals: Hospital[] = [
-  { id: '1', name: 'Apollo Hospital', location: 'Sarita Vihar, Delhi', facilities: ['24/7 Emergency', 'ICU', 'Pharmacy'], image: 'https://placehold.co/400x250.png', dataAiHint: 'hospital building' },
-  { id: '2', name: 'Fortis Hospital', location: 'Mulund, Mumbai', facilities: ['Multi-specialty', 'Ambulance Service', 'In-patient Care'], image: 'https://placehold.co/400x250.png', dataAiHint: 'modern hospital' },
-  { id: '3', name: 'Manipal Hospital', location: 'Old Airport Road, Bangalore', facilities: ['Robotic Surgery', 'Cancer Care', 'Pediatrics'], image: 'https://placehold.co/400x250.png', dataAiHint: 'clinic building' },
+  { id: 'h1', name: 'Apollo Hospital', location: 'Sarita Vihar, Delhi', facilities: ['24/7 Emergency', 'ICU', 'Pharmacy'], image: 'https://placehold.co/400x250.png', dataAiHint: 'hospital building', lat: 28.5220, lng: 77.2848, type: 'hospital' },
+  { id: 'h2', name: 'Fortis Hospital', location: 'Mulund, Mumbai', facilities: ['Multi-specialty', 'Ambulance Service', 'In-patient Care'], image: 'https://placehold.co/400x250.png', dataAiHint: 'modern hospital', lat: 19.1724, lng: 72.9463, type: 'hospital' },
+  { id: 'h3', name: 'Manipal Hospital', location: 'Old Airport Road, Bangalore', facilities: ['Robotic Surgery', 'Cancer Care', 'Pediatrics'], image: 'https://placehold.co/400x250.png', dataAiHint: 'clinic building', lat: 12.9608, lng: 77.6756, type: 'hospital' },
+  { id: 'h4', name: 'Max Healthcare', location: 'Saket, Delhi', facilities: ['Super Speciality', 'Advanced Cardiac Care', 'Organ Transplant'], image: 'https://placehold.co/400x250.png', dataAiHint: 'large hospital', lat: 28.5289, lng: 77.2117, type: 'hospital' },
 ];
+
+export type Clinic = {
+  id: string;
+  name: string;
+  location: string;
+  doctor: string;
+  lat: number;
+  lng: number;
+  type: 'clinic';
+};
+
+export const clinics: Clinic[] = [
+    { id: 'c1', name: 'Dr. Sharma\'s Clinic', location: 'Greater Kailash, Delhi', doctor: 'Dr. R.K. Sharma', lat: 28.5482, lng: 77.2396, type: 'clinic' },
+    { id: 'c2', name: 'Mumbai Family Clinic', location: 'Dadar, Mumbai', doctor: 'Dr. A. Joshi', lat: 19.0213, lng: 72.8424, type: 'clinic' },
+    { id: 'c3', name: 'Bangalore Wellness Center', location: 'Indiranagar, Bangalore', doctor: 'Dr. S. Reddy', lat: 12.9784, lng: 77.6408, type: 'clinic' },
+];
+
+export type MedicalStore = {
+    id: string;
+    name: string;
+    location: string;
+    isOpen247: boolean;
+    lat: number;
+    lng: number;
+    type: 'medical';
+};
+
+export const medicals: MedicalStore[] = [
+    { id: 'm1', name: 'Apollo Pharmacy', location: 'Lajpat Nagar, Delhi', isOpen247: true, lat: 28.5676, lng: 77.2435, type: 'medical' },
+    { id: 'm2', name: 'Wellness Forever', location: 'Bandra, Mumbai', isOpen247: true, lat: 19.0596, lng: 72.8407, type: 'medical' },
+    { id: 'm3', name: 'MedPlus', location: 'Jayanagar, Bangalore', isOpen247: false, lat: 12.9253, lng: 77.5807, type: 'medical' },
+];
+
+export type HealthcareFacility = Hospital | Clinic | MedicalStore;
+
+export const allFacilities: HealthcareFacility[] = [...hospitals, ...clinics, ...medicals];
+
 
 export type Appointment = {
   id: string;
