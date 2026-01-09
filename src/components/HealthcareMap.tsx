@@ -1,18 +1,17 @@
-
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   APIProvider,
   Map,
   AdvancedMarker,
   InfoWindow,
   useMap,
-  ControlPosition,
 } from '@vis.gl/react-google-maps';
 import { allFacilities, type HealthcareFacility } from '@/lib/data';
 import { Button } from './ui/button';
-import { LocateFixed } from 'lucide-react';
+import { LocateFixed, MapPinOff } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 const facilityIcons = {
   hospital: {
@@ -112,30 +111,93 @@ const RecenterControl = ({onClick}: {onClick: () => void}) => {
     );
 }
 
+const LocationPermissionPrompt = ({onAllow}: {onAllow: () => void}) => {
+    return (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+            <Card className="max-w-sm text-center">
+                <CardHeader>
+                    <CardTitle className="flex flex-col items-center gap-2">
+                        <LocateFixed className="w-8 h-8 text-primary" />
+                        Show Nearby Facilities
+                    </CardTitle>
+                    <CardDescription>
+                        To find the nearest emergency services, please allow Sanjiwani Health to access your current location.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Button onClick={onAllow} size="lg">Allow Location Access</Button>
+                    <p className="text-xs text-muted-foreground mt-2">
+                        You can change this permission in your browser settings at any time.
+                    </p>
+                </CardContent>
+            </Card>
+        </div>
+    )
+}
+
+const LocationError = () => {
+    return (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+             <Card className="max-w-sm text-center">
+                <CardHeader>
+                    <CardTitle className="flex flex-col items-center gap-2">
+                        <MapPinOff className="w-8 h-8 text-destructive" />
+                        Location Access Denied
+                    </CardTitle>
+                    <CardDescription>
+                        You have denied location access. To use this feature, please enable location permissions for this site in your browser settings.
+                    </CardDescription>
+                </CardHeader>
+            </Card>
+        </div>
+    )
+}
+
 
 export default function HealthcareMap() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [activeFacility, setActiveFacility] = useState<HealthcareFacility | null>(null);
+  const [permissionStatus, setPermissionStatus] = useState<'prompt' | 'granted' | 'denied'>('prompt');
   const map = useMap();
 
   useEffect(() => {
+    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+      setPermissionStatus(result.state);
+      if (result.state === 'granted') {
+        fetchUserLocation();
+      }
+      result.onchange = () => {
+        setPermissionStatus(result.state);
+        if (result.state === 'granted') {
+            fetchUserLocation();
+        }
+      };
+    });
+  }, []);
+
+  const fetchUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ lat: latitude, lng: longitude });
+          setPermissionStatus('granted');
         },
         (error) => {
           console.error("Error getting user location:", error);
-          // Fallback to default location if user denies permission
-          setUserLocation({ lat: 28.6139, lng: 77.209 });
+          // Fallback to default location if user denies permission after prompt
+          if (userLocation === null) {
+            setUserLocation({ lat: 28.6139, lng: 77.209 });
+          }
+          setPermissionStatus('denied');
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
       setUserLocation({ lat: 28.6139, lng: 77.209 });
+      setPermissionStatus('denied');
     }
-  }, []);
+  }
 
   useEffect(() => {
     if (userLocation && map) {
@@ -158,6 +220,8 @@ export default function HealthcareMap() {
 
   return (
     <div className="w-full h-full relative">
+      {permissionStatus === 'prompt' && <LocationPermissionPrompt onAllow={fetchUserLocation} />}
+      {permissionStatus === 'denied' && !userLocation && <LocationError />}
       <Map
         defaultCenter={userLocation || { lat: 28.6139, lng: 77.209 }}
         defaultZoom={14}
