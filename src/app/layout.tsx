@@ -1,5 +1,5 @@
 
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import { Clarity } from '@/components/clarity';
@@ -8,6 +8,9 @@ import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: 'Sanjiwani Health',
   description: 'Your trusted partner in health and wellness.',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -26,10 +29,10 @@ export default function RootLayout({
         {children}
         <Analytics />
         <Clarity />
-        <Script 
-          src="https://www.googletagmanager.com/gtag/js?id=G-7V5GSKKC29" 
-          strategy="afterInteractive" 
-          async 
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7V5GSKKC29"
+          strategy="afterInteractive"
+          async
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
