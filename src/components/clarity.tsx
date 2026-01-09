@@ -5,7 +5,7 @@ import { clarity } from '@microsoft/clarity';
 
 export function Clarity() {
   useEffect(() => {
-    clarity.init('YOUR_CLARITY_PROJECT_ID');
+    clarity.init('uyko6rz814');
   }, []);
 
   return null;
