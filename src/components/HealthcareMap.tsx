@@ -8,7 +8,6 @@ import {
   InfoWindow,
   useMap,
   Control,
-  ControlType,
 } from '@vis.gl/react-google-maps';
 import { allFacilities, type HealthcareFacility } from '@/lib/data';
 import { Button } from './ui/button';
@@ -180,7 +179,7 @@ export default function HealthcareMap() {
           </InfoWindow>
         )}
         
-        <Control position={ControlType.RIGHT_BOTTOM}>
+        <Control position={'RIGHT_BOTTOM'}>
             <div className='p-4'>
                 <Button variant="outline" size="icon" onClick={handleRecenter} className="bg-card shadow-md">
                     <LocateFixed className='w-5 h-5' />
