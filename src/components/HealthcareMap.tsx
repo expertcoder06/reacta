@@ -2,13 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {
-  Map,
-  AdvancedMarker,
-  InfoWindow,
-  useMap,
-  Control,
-} from '@vis.gl/react-google-maps';
+import * as googleMaps from '@vis.gl/react-google-maps';
 import { allFacilities, type HealthcareFacility } from '@/lib/data';
 import { Button } from './ui/button';
 import { LocateFixed } from 'lucide-react';
@@ -90,14 +84,14 @@ const CustomMarker = ({
   const { icon, bgColor } = facilityIcons[facility.type];
 
   return (
-    <AdvancedMarker position={{ lat: facility.lat, lng: facility.lng }} onClick={onClick}>
+    <googleMaps.AdvancedMarker position={{ lat: facility.lat, lng: facility.lng }} onClick={onClick}>
       <div
         className="w-8 h-8 rounded-full flex items-center justify-center shadow-md"
         style={{ backgroundColor: bgColor }}
       >
         {icon}
       </div>
-    </AdvancedMarker>
+    </googleMaps.AdvancedMarker>
   );
 };
 
@@ -105,7 +99,7 @@ const CustomMarker = ({
 export default function HealthcareMap() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [activeFacility, setActiveFacility] = useState<HealthcareFacility | null>(null);
-  const map = useMap();
+  const map = googleMaps.useMap();
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -147,7 +141,7 @@ export default function HealthcareMap() {
 
   return (
     <div className="w-full h-full">
-      <Map
+      <googleMaps.Map
         defaultCenter={userLocation || { lat: 28.6139, lng: 77.209 }}
         defaultZoom={14}
         gestureHandling={'greedy'}
@@ -155,9 +149,9 @@ export default function HealthcareMap() {
         mapId="sanjiwani_map"
       >
         {userLocation && (
-            <AdvancedMarker position={userLocation} title="Your Location">
+            <googleMaps.AdvancedMarker position={userLocation} title="Your Location">
                 <div className="w-4 h-4 rounded-full bg-primary ring-4 ring-primary/30" />
-            </AdvancedMarker>
+            </googleMaps.AdvancedMarker>
         )}
         {allFacilities.map((facility) => (
           <CustomMarker
@@ -168,7 +162,7 @@ export default function HealthcareMap() {
         ))}
 
         {activeFacility && (
-          <InfoWindow
+          <googleMaps.InfoWindow
             position={{ lat: activeFacility.lat, lng: activeFacility.lng }}
             onCloseClick={() => setActiveFacility(null)}
           >
@@ -176,17 +170,17 @@ export default function HealthcareMap() {
                 <h3 className="font-bold text-base">{activeFacility.name}</h3>
                 <p className="text-sm text-muted-foreground">{activeFacility.location}</p>
             </div>
-          </InfoWindow>
+          </googleMaps.InfoWindow>
         )}
         
-        <Control position={'RIGHT_BOTTOM'}>
+        <googleMaps.Control position={googleMaps.ControlPosition.RIGHT_BOTTOM}>
             <div className='p-4'>
                 <Button variant="outline" size="icon" onClick={handleRecenter} className="bg-card shadow-md">
                     <LocateFixed className='w-5 h-5' />
                 </Button>
             </div>
-        </Control>
-      </Map>
+        </googleMaps.Control>
+      </googleMaps.Map>
     </div>
   );
 }
