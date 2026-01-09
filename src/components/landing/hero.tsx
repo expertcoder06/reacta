@@ -43,11 +43,11 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           variants={motionVariants.slideUp(0.4)}
         >
-          <Button size="lg" variant="default" className="w-full sm:w-auto shadow-[0_10px_30px_hsl(var(--primary)/0.15)]">
-            Book Appointment
+          <Button size="lg" variant="default" className="w-full sm:w-auto shadow-[0_10px_30px_hsl(var(--primary)/0.15)]" asChild>
+            <Link href="/doctors">Book Appointment</Link>
           </Button>
-          <Button size="lg" variant="outline" className="w-full sm:w-auto">
-            Find Emergency Care
+          <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
+            <Link href="/emergency">Find Emergency Care</Link>
           </Button>
         </motion.div>
       </motion.div>
