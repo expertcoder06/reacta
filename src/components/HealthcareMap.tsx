@@ -99,18 +99,11 @@ const RecenterControl = ({onClick}: {onClick: () => void}) => {
     const controlDiv = useRef<HTMLDivElement>(null);
     const map = googleMaps.useMap();
     
-    useMapControl({
+    googleMaps.useMapControl({
       position: google.maps.ControlPosition.RIGHT_BOTTOM,
       instance: controlDiv.current
     });
     
-    useEffect(() => {
-        if(controlDiv.current && map) {
-            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv.current);
-        }
-    }, [map]);
-
-
     return (
         <div ref={controlDiv} className="p-4">
             <Button variant="outline" size="icon" onClick={onClick} className="bg-card shadow-md">
