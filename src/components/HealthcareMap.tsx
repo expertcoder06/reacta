@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -62,7 +63,7 @@ const facilityIcons = {
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        viewBox="0 0 24 24"
+        viewBox="00 24 24"
         fill="none"
         stroke="white"
         strokeWidth="2"
@@ -169,6 +170,32 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
   const [permissionStatus, setPermissionStatus] = useState<'prompt' | 'granted' | 'denied'>('prompt');
   const map = useMap();
 
+  const fetchUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const location = { lat: latitude, lng: longitude };
+          setUserLocation(location);
+          onUserLocationChange(location);
+          setPermissionStatus('granted');
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+          if (userLocation === null) {
+            // fallback to a default location if user denies permission
+            setUserLocation({ lat: 28.6139, lng: 77.209 }); 
+          }
+          setPermissionStatus('denied');
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      setUserLocation({ lat: 28.6139, lng: 77.209 }); // fallback
+      setPermissionStatus('denied');
+    }
+  }
+
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
       if (result.state === 'granted') {
@@ -184,31 +211,6 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
       };
     });
   }, []);
-
-  const fetchUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const location = { lat: latitude, lng: longitude };
-          setUserLocation(location);
-          onUserLocationChange(location);
-          setPermissionStatus('granted');
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
-          if (userLocation === null) {
-            setUserLocation({ lat: 28.6139, lng: 77.209 });
-          }
-          setPermissionStatus('denied');
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-      setUserLocation({ lat: 28.6139, lng: 77.209 });
-      setPermissionStatus('denied');
-    }
-  }
 
   useEffect(() => {
     if (userLocation) {
@@ -230,10 +232,10 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
   }, [selectedFacility, map]);
 
   useEffect(() => {
-    if (userLocation && map) {
+    if (userLocation && map && permissionStatus === 'granted') {
         map.panTo(userLocation);
     }
-  }, [userLocation, map]);
+  }, [userLocation, map, permissionStatus]);
 
 
   const handleMarkerClick = (facility: HealthcareFacility) => {
@@ -251,7 +253,7 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
   return (
     <div className="w-full h-full relative">
       {permissionStatus === 'prompt' && <LocationPermissionPrompt onAllow={fetchUserLocation} />}
-      {permissionStatus === 'denied' && <LocationError />}
+      {permissionStatus === 'denied' && !userLocation && <LocationError />}
       <Map
         defaultCenter={userLocation || { lat: 28.6139, lng: 77.209 }}
         defaultZoom={14}
@@ -290,3 +292,5 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
     </div>
   );
 }
+
+    
