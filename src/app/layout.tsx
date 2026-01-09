@@ -3,6 +3,7 @@ import type {Metadata} from 'next';
 import Script from 'next/script';
 import './globals.css';
 import { Clarity } from '@/components/clarity';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: 'Sanjiwani Health',
@@ -23,6 +24,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
+        <Analytics />
         <Clarity />
         <Script 
           src="https://www.googletagmanager.com/gtag/js?id=G-7V5GSKKC29" 
