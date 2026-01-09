@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   APIProvider,
   Map,
@@ -12,6 +12,7 @@ import { allFacilities, type HealthcareFacility } from '@/lib/data';
 import { Button } from './ui/button';
 import { LocateFixed, MapPinOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { calculateDistance } from '@/lib/utils';
 
 const facilityIcons = {
   hospital: {
@@ -83,16 +84,18 @@ const facilityIcons = {
 const CustomMarker = ({
   facility,
   onClick,
+  isSelected,
 }: {
   facility: HealthcareFacility;
   onClick: () => void;
+  isSelected: boolean;
 }) => {
   const { icon, bgColor } = facilityIcons[facility.type];
 
   return (
     <AdvancedMarker position={{ lat: facility.lat, lng: facility.lng }} onClick={onClick}>
       <div
-        className="w-8 h-8 rounded-full flex items-center justify-center shadow-md"
+        className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${isSelected ? 'ring-4 ring-offset-2 ring-primary' : ''}`}
         style={{ backgroundColor: bgColor }}
       >
         {icon}
@@ -154,7 +157,13 @@ const LocationError = () => {
 }
 
 
-export default function HealthcareMap() {
+type HealthcareMapProps = {
+  onFacilitiesSorted: (facilities: HealthcareFacility[]) => void;
+  selectedFacility: HealthcareFacility | null;
+  onUserLocationChange: (location: {lat: number, lng: number} | null) => void;
+};
+
+export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, onUserLocationChange }: HealthcareMapProps) {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [activeFacility, setActiveFacility] = useState<HealthcareFacility | null>(null);
   const [permissionStatus, setPermissionStatus] = useState<'prompt' | 'granted' | 'denied'>('prompt');
@@ -181,12 +190,13 @@ export default function HealthcareMap() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, lng: longitude });
+          const location = { lat: latitude, lng: longitude };
+          setUserLocation(location);
+          onUserLocationChange(location);
           setPermissionStatus('granted');
         },
         (error) => {
           console.error("Error getting user location:", error);
-          // Fallback to default location if user denies permission after prompt
           if (userLocation === null) {
             setUserLocation({ lat: 28.6139, lng: 77.209 });
           }
@@ -199,6 +209,25 @@ export default function HealthcareMap() {
       setPermissionStatus('denied');
     }
   }
+
+  useEffect(() => {
+    if (userLocation) {
+        const sorted = [...allFacilities]
+            .map(f => ({
+                ...f,
+                distance: calculateDistance(userLocation.lat, userLocation.lng, f.lat, f.lng)
+            }))
+            .sort((a, b) => a.distance - b.distance);
+        onFacilitiesSorted(sorted);
+    }
+  }, [userLocation, onFacilitiesSorted]);
+
+  useEffect(() => {
+    if (selectedFacility && map) {
+        map.panTo({ lat: selectedFacility.lat, lng: selectedFacility.lng });
+        setActiveFacility(selectedFacility);
+    }
+  }, [selectedFacility, map]);
 
   useEffect(() => {
     if (userLocation && map) {
@@ -240,6 +269,7 @@ export default function HealthcareMap() {
             key={facility.id}
             facility={facility}
             onClick={() => handleMarkerClick(facility)}
+            isSelected={activeFacility?.id === facility.id}
           />
         ))}
 
@@ -247,6 +277,7 @@ export default function HealthcareMap() {
           <InfoWindow
             position={{ lat: activeFacility.lat, lng: activeFacility.lng }}
             onCloseClick={() => setActiveFacility(null)}
+            pixelOffset={[0, -40]}
           >
             <div className="p-2">
                 <h3 className="font-bold text-base">{activeFacility.name}</h3>

@@ -2,7 +2,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useState } from 'react';
 import { APIProvider } from "@vis.gl/react-google-maps";
+import type { HealthcareFacility } from '@/lib/data';
+import { Skeleton } from "@/components/ui/skeleton";
+import NearestFacilitiesList from "@/components/NearestFacilitiesList";
 
 // Load map only on the client
 const HealthcareMap = dynamic(() => import("@/components/HealthcareMap"), {
@@ -12,6 +16,9 @@ const HealthcareMap = dynamic(() => import("@/components/HealthcareMap"), {
 
 export default function EmergencyPage() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const [sortedFacilities, setSortedFacilities] = useState<HealthcareFacility[]>([]);
+  const [selectedFacility, setSelectedFacility] = useState<HealthcareFacility | null>(null);
+  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
 
   if (!apiKey) {
     return (
@@ -34,16 +41,22 @@ export default function EmergencyPage() {
 
   return (
     <APIProvider apiKey={apiKey}>
-      <div className="flex flex-col h-[calc(100vh-200px)] w-full rounded-lg overflow-hidden border">
-         <div className="p-4 bg-card border-b">
-           <h1 className="text-2xl font-bold text-center text-destructive">Emergency Healthcare Map</h1>
-           <p className="text-center text-muted-foreground">
-                The map below is showing an error because billing is not enabled for the associated Google Cloud project. 
-                Please enable billing in the Google Cloud Console to use Google Maps.
-            </p>
-         </div>
-        <HealthcareMap />
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 h-[calc(100vh-200px)]">
+            <div className="md:col-span-1 lg:col-span-1 h-full overflow-y-auto">
+                 <NearestFacilitiesList 
+                    facilities={sortedFacilities}
+                    onFacilitySelect={setSelectedFacility}
+                    userLocation={userLocation}
+                 />
+            </div>
+            <div className="md:col-span-2 lg:col-span-3 h-full w-full rounded-lg overflow-hidden border">
+                <HealthcareMap 
+                    onFacilitiesSorted={setSortedFacilities}
+                    selectedFacility={selectedFacility}
+                    onUserLocationChange={setUserLocation}
+                />
+            </div>
+        </div>
     </APIProvider>
   );
 }

@@ -42,6 +42,7 @@ export type Hospital = {
   lat: number;
   lng: number;
   type: 'hospital';
+  distance?: number;
 };
 
 export const hospitals: Hospital[] = [
@@ -59,6 +60,7 @@ export type Clinic = {
   lat: number;
   lng: number;
   type: 'clinic';
+  distance?: number;
 };
 
 export const clinics: Clinic[] = [
@@ -75,6 +77,7 @@ export type MedicalStore = {
     lat: number;
     lng: number;
     type: 'medical';
+    distance?: number;
 };
 
 export const medicals: MedicalStore[] = [
@@ -83,7 +86,7 @@ export const medicals: MedicalStore[] = [
     { id: 'm3', name: 'MedPlus', location: 'Jayanagar, Bangalore', isOpen247: false, lat: 12.9253, lng: 77.5807, type: 'medical' },
 ];
 
-export type HealthcareFacility = Hospital | Clinic | MedicalStore;
+export type HealthcareFacility = (Hospital | Clinic | MedicalStore) & { distance?: number };
 
 export const allFacilities: HealthcareFacility[] = [...hospitals, ...clinics, ...medicals];
 
