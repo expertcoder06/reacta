@@ -219,6 +219,7 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
                 ...f,
                 distance: calculateDistance(userLocation.lat, userLocation.lng, f.lat, f.lng)
             }))
+            .filter(f => f.distance <= 10)
             .sort((a, b) => a.distance - b.distance);
         onFacilitiesSorted(sorted);
     }
@@ -292,5 +293,7 @@ export default function HealthcareMap({ onFacilitiesSorted, selectedFacility, on
     </div>
   );
 }
+
+    
 
     
