@@ -1,6 +1,7 @@
 
 import type {Metadata} from 'next';
 import './globals.css';
+import { Clarity } from '@/components/clarity';
 
 export const metadata: Metadata = {
   title: 'Sanjiwani Health',
@@ -21,6 +22,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
+        <Clarity />
       </body>
     </html>
   );
