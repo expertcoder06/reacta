@@ -162,9 +162,10 @@ export default function HealthcareMap() {
 
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      setPermissionStatus(result.state);
       if (result.state === 'granted') {
         fetchUserLocation();
+      } else {
+        setPermissionStatus(result.state);
       }
       result.onchange = () => {
         setPermissionStatus(result.state);
@@ -221,7 +222,7 @@ export default function HealthcareMap() {
   return (
     <div className="w-full h-full relative">
       {permissionStatus === 'prompt' && <LocationPermissionPrompt onAllow={fetchUserLocation} />}
-      {permissionStatus === 'denied' && !userLocation && <LocationError />}
+      {permissionStatus === 'denied' && <LocationError />}
       <Map
         defaultCenter={userLocation || { lat: 28.6139, lng: 77.209 }}
         defaultZoom={14}
