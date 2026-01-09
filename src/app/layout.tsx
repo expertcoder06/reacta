@@ -1,5 +1,6 @@
 
 import type {Metadata} from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { Clarity } from '@/components/clarity';
 
@@ -23,6 +24,20 @@ export default function RootLayout({
       <body className="font-body antialiased">
         {children}
         <Clarity />
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-7V5GSKKC29" 
+          strategy="afterInteractive" 
+          async 
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-7V5GSKKC29');
+          `}
+        </Script>
       </body>
     </html>
   );
