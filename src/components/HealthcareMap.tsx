@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as googleMaps from '@vis.gl/react-google-maps';
 import { allFacilities, type HealthcareFacility } from '@/lib/data';
 import { Button } from './ui/button';
@@ -95,6 +95,31 @@ const CustomMarker = ({
   );
 };
 
+const RecenterControl = ({onClick}: {onClick: () => void}) => {
+    const controlDiv = useRef<HTMLDivElement>(null);
+    const map = googleMaps.useMap();
+    
+    useMapControl({
+      position: google.maps.ControlPosition.RIGHT_BOTTOM,
+      instance: controlDiv.current
+    });
+    
+    useEffect(() => {
+        if(controlDiv.current && map) {
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv.current);
+        }
+    }, [map]);
+
+
+    return (
+        <div ref={controlDiv} className="p-4">
+            <Button variant="outline" size="icon" onClick={onClick} className="bg-card shadow-md">
+                <LocateFixed className='w-5 h-5' />
+            </Button>
+        </div>
+    );
+}
+
 
 export default function HealthcareMap() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -173,13 +198,7 @@ export default function HealthcareMap() {
           </googleMaps.InfoWindow>
         )}
         
-        <googleMaps.Control position={googleMaps.ControlPosition.RIGHT_BOTTOM}>
-            <div className='p-4'>
-                <Button variant="outline" size="icon" onClick={handleRecenter} className="bg-card shadow-md">
-                    <LocateFixed className='w-5 h-5' />
-                </Button>
-            </div>
-        </googleMaps.Control>
+        <RecenterControl onClick={handleRecenter} />
       </googleMaps.Map>
     </div>
   );
